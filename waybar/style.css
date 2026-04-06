@@ -1,0 +1,228 @@
+/* Catppuccin Mocha Palette */
+@define-color base #1e1e2e;
+@define-color mantle #181825;
+@define-color crust #11111b;
+@define-color surface0 #313244;
+@define-color surface1 #45475a;
+@define-color surface2 #585b70;
+@define-color overlay0 #6c7086;
+@define-color overlay1 #7f849c;
+@define-color text #cdd6f4;
+@define-color subtext0 #a6adc8;
+@define-color subtext1 #bac2de;
+@define-color rosewater #f5e0dc;
+@define-color flamingo #f2cdcd;
+@define-color pink #f5c2e7;
+@define-color mauve #cba6f7;
+@define-color red #f38ba8;
+@define-color maroon #eba0ac;
+@define-color peach #fab387;
+@define-color yellow #f9e2af;
+@define-color green #a6e3a1;
+@define-color teal #94e2d5;
+@define-color sky #89dceb;
+@define-color sapphire #74c7ec;
+@define-color blue #89b4fa;
+@define-color lavender #b4befe;
+
+/* Global */
+* {
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", "Noto Sans", sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: @text;
+}
+
+tooltip {
+    background: @base;
+    border: 1px solid @surface1;
+    border-radius: 10px;
+    color: @text;
+}
+
+/* Module styling */
+#window,
+#taskbar,
+#clock,
+#bluetooth,
+#battery,
+#network,
+#pulseaudio,
+#custom-sysmonitor,
+#language,
+#tray,
+#custom-notification {
+    padding: 0 12px;
+    margin: 4px 2px;
+    border-radius: 10px;
+    background: alpha(@base, 0.85);
+}
+
+/* Window title */
+#window {
+    color: @subtext1;
+    font-style: italic;
+}
+
+/* Taskbar */
+#taskbar {
+    padding: 0 4px;
+}
+
+#taskbar button {
+    padding: 0 4px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    min-width: 24px;
+    transition: all 0.2s ease;
+}
+
+#taskbar button:hover {
+    background: alpha(@surface1, 0.5);
+}
+
+#taskbar button.active {
+    background: alpha(@green, 0.25);
+    border-bottom: 2px solid @green;
+}
+
+/* Clock & Date */
+#clock {
+    color: @lavender;
+    font-weight: bold;
+}
+
+/* Language */
+#language {
+    color: @peach;
+    font-weight: bold;
+}
+
+/* System monitor button */
+#custom-sysmonitor {
+    color: @sky;
+}
+
+#custom-sysmonitor:hover {
+    background: alpha(@sky, 0.15);
+}
+
+/* Pulseaudio */
+#pulseaudio {
+    color: @pink;
+}
+
+#pulseaudio.muted {
+    color: @overlay0;
+}
+
+#pulseaudio:hover {
+    background: alpha(@pink, 0.15);
+}
+
+/* MPRIS / Media */
+#mpris {
+    color: @green;
+    font-style: italic;
+    padding: 0 12px;
+    margin: 4px 2px;
+    border-radius: 10px;
+    background: transparent;
+}
+
+#mpris.paused {
+    color: @overlay1;
+}
+
+#custom-media-prev,
+#custom-media-next {
+    color: @green;
+    font-size: 15px;
+    padding: 0 6px;
+    margin: 4px 0px;
+    background: transparent;
+}
+
+#custom-media-prev:hover,
+#custom-media-next:hover {
+    color: @pink;
+}
+
+/* Updates */
+#custom-updates {
+    color: @peach;
+    padding: 0 12px;
+    margin: 4px 2px;
+    border-radius: 10px;
+    background: transparent;
+}
+
+#custom-updates.updated {
+    color: @overlay0;
+}
+
+/* Bluetooth */
+#bluetooth {
+    color: @blue;
+}
+
+#bluetooth.disabled {
+    color: @overlay0;
+}
+
+/* Battery */
+#battery {
+    color: @green;
+}
+
+#battery.warning {
+    color: @yellow;
+}
+
+#battery.critical {
+    color: @red;
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    to {
+        color: @surface0;
+    }
+}
+
+/* Network */
+#network {
+    color: @teal;
+}
+
+#network.disconnected {
+    color: @overlay0;
+}
+
+/* Tray */
+#tray {
+    color: @text;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* Notification */
+#custom-notification {
+    color: @yellow;
+}
+
+#custom-notification:hover {
+    background: alpha(@yellow, 0.15);
+}

@@ -1,0 +1,68 @@
+* {
+    bg:              rgba ( 30, 30, 46, 95 % );
+    bg-alt:          rgba ( 49, 50, 68, 100 % );
+    bg-hover:        rgba ( 69, 71, 90, 60 % );
+    fg:              rgba ( 205, 214, 244, 100 % );
+    fg-dim:          rgba ( 166, 173, 200, 100 % );
+    accent:          rgba ( 166, 227, 161, 100 % );
+    red:             rgba ( 243, 139, 168, 100 % );
+    green:           rgba ( 166, 227, 161, 100 % );
+    yellow:          rgba ( 249, 226, 175, 100 % );
+    blue:            rgba ( 137, 180, 250, 100 % );
+    border-clr:      rgba ( 166, 227, 161, 40 % );
+    background-color: transparent;
+}
+
+window {
+    width:            300px;
+    border-radius:    16px;
+    border:           2px;
+    border-color:     var(border-clr);
+    background-color: var(bg);
+    padding:          20px;
+}
+
+mainbox {
+    background-color: transparent;
+    children:         [ inputbar, message, listview ];
+    spacing:          12px;
+}
+
+inputbar {
+    padding:          12px 16px;
+    background-color: var(bg-alt);
+    border-radius:    12px;
+    children:         [ prompt ];
+}
+
+prompt {
+    text-color:       var(accent);
+    background-color: transparent;
+    font:             "JetBrainsMono Nerd Font Bold 13";
+}
+
+listview {
+    lines:            6;
+    spacing:          6px;
+    padding:          0px;
+    background-color: transparent;
+    fixed-height:     true;
+}
+
+element {
+    padding:          10px 16px;
+    border-radius:    10px;
+    background-color: transparent;
+    text-color:       var(fg);
+}
+
+element selected {
+    background-color: var(accent);
+    text-color:       var(bg);
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    font:             "JetBrainsMono Nerd Font 12";
+}

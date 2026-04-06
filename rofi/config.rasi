@@ -1,0 +1,94 @@
+configuration {
+    modi: "drun,run,filebrowser";
+    show-icons: true;
+    icon-theme: "Papirus";
+    display-drun: "Uygulamalar";
+    display-run: "Calistir";
+    display-filebrowser: "Dosyalar";
+    drun-display-format: "{name}";
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+* {
+    bg:              rgba ( 30, 30, 46, 95 % );
+    bg-alt:          rgba ( 49, 50, 68, 100 % );
+    bg-hover:        rgba ( 69, 71, 90, 50 % );
+    fg:              rgba ( 205, 214, 244, 100 % );
+    fg-dim:          rgba ( 166, 173, 200, 100 % );
+    accent:          rgba ( 166, 227, 161, 100 % );
+    border-clr:      rgba ( 166, 227, 161, 30 % );
+    selected-bg:     rgba ( 166, 227, 161, 18 % );
+    background-color: transparent;
+}
+
+window {
+    width: 680px;
+    border-radius: 18px;
+    border: 2px;
+    border-color: var(border-clr);
+    background-color: var(bg);
+    padding: 24px;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [ inputbar, listview ];
+    spacing: 18px;
+}
+
+inputbar {
+    background-color: var(bg-alt);
+    border-radius: 14px;
+    padding: 14px 18px;
+    children: [ prompt, entry ];
+    spacing: 10px;
+}
+
+prompt {
+    background-color: transparent;
+    text-color: var(accent);
+    font: "JetBrainsMono Nerd Font Bold 13";
+}
+
+entry {
+    background-color: transparent;
+    text-color: var(fg);
+    placeholder: "Ara...";
+    placeholder-color: var(fg-dim);
+}
+
+listview {
+    background-color: transparent;
+    columns: 2;
+    lines: 7;
+    spacing: 6px;
+    scrollbar: false;
+    fixed-height: true;
+}
+
+element {
+    background-color: transparent;
+    text-color: var(fg);
+    padding: 10px 14px;
+    border-radius: 12px;
+    spacing: 12px;
+}
+
+element selected {
+    background-color: var(selected-bg);
+    text-color: var(accent);
+    border: 1px;
+    border-color: var(border-clr);
+}
+
+element-icon {
+    size: 32px;
+    background-color: transparent;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    vertical-align: 0.5;
+    font: "JetBrainsMono Nerd Font 11";
+}
