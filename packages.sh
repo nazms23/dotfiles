@@ -19,7 +19,9 @@ sudo pacman -S --needed \
     xdg-desktop-portal-hyprland \
     ttf-jetbrains-mono-nerd noto-fonts-emoji \
     zip unzip \
-    github-cli
+    github-cli \
+    eww \
+    nwg-look
 
 echo ""
 echo "=== AUR paketleri kuruluyor (yay) ==="
@@ -31,11 +33,20 @@ yay -S --needed \
     catppuccin-cursors-mocha \
     kvantum-theme-catppuccin-git \
     networkmanager-dmenu-git \
-    auto-cpufreq
+    auto-cpufreq \
+    swayosd-git \
+    catppuccin-gtk-theme-mocha
 
 echo ""
 echo "=== Spicetify kuruluyor ==="
 curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
+
+echo ""
+echo "=== Hyprexpo plugin kur ==="
+hyprpm update
+hyprpm add https://github.com/hyprwm/hyprland-plugins
+hyprpm enable hyprexpo
+hyprpm reload
 
 echo ""
 echo "=== Servisleri etkinlestir ==="

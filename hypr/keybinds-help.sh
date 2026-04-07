@@ -99,6 +99,14 @@ $S
 
 $S
 
+<span $H>EWW Widgetlar</span>
+<span $K>SUPER + G</span>              <span $V>Masaustu widgeti goster/gizle</span>
+<span $K>SUPER + A</span>              <span $V>Workspace overview (Hyprexpo)</span>
+<span $K>Waybar saat tikla</span>      <span $V>Takvim popup</span>
+<span $K>Waybar disli tikla</span>     <span $V>Sistem popup (WiFi/BT/Ses/Parlaklik)</span>
+
+$S
+
 <span $H>Klavye ve Dil</span>
 <span $K>ALT + SHIFT</span>            <span $V>Turkce / Ingilizce degistir</span>
 <span $K>Waybar klavye ikonu</span>    <span $V>Tiklayarak dil degistir</span>"
@@ -146,6 +154,9 @@ $S
 <span $V>Loupe</span>           →  <span $K>Resim goruntleyici</span>
 <span $V>Kando</span>           →  <span $K>Radial pie menu</span>
 <span $V>Kvantum</span>         →  <span $K>Qt tema motoru (Catppuccin)</span>
+<span $V>EWW</span>             →  <span $K>Masaustu widget sistemi</span>
+<span $V>SwayOSD</span>         →  <span $K>Ses/parlaklik ekran gostergesi</span>
+<span $V>Hyprexpo</span>        →  <span $K>Workspace kus bakisi</span>
 
 $S
 

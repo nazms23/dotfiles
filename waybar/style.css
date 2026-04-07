@@ -48,11 +48,9 @@ tooltip {
 #window,
 #taskbar,
 #clock,
-#bluetooth,
 #battery,
-#network,
 #pulseaudio,
-#custom-sysmonitor,
+#custom-system-popup,
 #language,
 #tray,
 #custom-notification {
@@ -104,13 +102,13 @@ tooltip {
     font-weight: bold;
 }
 
-/* System monitor button */
-#custom-sysmonitor {
-    color: @sky;
+/* System popup button */
+#custom-system-popup {
+    color: @green;
 }
 
-#custom-sysmonitor:hover {
-    background: alpha(@sky, 0.15);
+#custom-system-popup:hover {
+    background: alpha(@green, 0.15);
 }
 
 /* Pulseaudio */
@@ -167,15 +165,6 @@ tooltip {
     color: @overlay0;
 }
 
-/* Bluetooth */
-#bluetooth {
-    color: @blue;
-}
-
-#bluetooth.disabled {
-    color: @overlay0;
-}
-
 /* Battery */
 #battery {
     color: @green;
@@ -194,15 +183,6 @@ tooltip {
     to {
         color: @surface0;
     }
-}
-
-/* Network */
-#network {
-    color: @teal;
-}
-
-#network.disconnected {
-    color: @overlay0;
 }
 
 /* Tray */

@@ -17,14 +17,11 @@
     ],
     "modules-right": [
         "tray",
-        "bluetooth",
-        "network",
         "battery",
         "pulseaudio",
-        "custom/sysmonitor",
         "hyprland/language",
         "clock",
-        "custom/updates",
+        "custom/system-popup",
         "custom/notification"
     ],
     "hyprland/window": {
@@ -32,14 +29,14 @@
         "max-length": 35,
         "separate-outputs": true,
         "rewrite": {
-            "(.*) — Mozilla Firefox": " $1",
-            "(.*) - Brave": " $1",
-            "(.*) — Dolphin": " $1",
-            "(.*) - Visual Studio Code": " $1",
-            "kitty": " Terminal",
-            "(.*) - Spotify": " $1",
-            "Steam": " Steam",
-            "": " Masaustu"
+            "(.*) — Mozilla Firefox": "󰈹 $1",
+            "(.*) - Brave": "󰊯 $1",
+            "(.*) — Dolphin": "󰉋 $1",
+            "(.*) - Visual Studio Code": "󰨞 $1",
+            "kitty": " Terminal",
+            "(.*) - Spotify": "󰓇 $1",
+            "Steam": "󰓓 Steam",
+            "": "󰣇 Masaustu"
         }
     },
     "wlr/taskbar": {
@@ -50,52 +47,36 @@
         "on-click-middle": "close"
     },
     "clock": {
-        "format": " {:%d %B %Y   %H:%M}",
+        "format": "󰃭 {:%d %B %Y   %H:%M}",
         "locale": "tr_TR.UTF-8",
-        "tooltip-format": "<tt>{calendar}</tt>",
-        "calendar": {
-            "mode": "month",
-            "format": {
-                "today": "<span color='#f5c2e7'><b>{}</b></span>"
-            }
-        },
-        "actions": {
-            "on-click-right": "mode"
-        }
+        "tooltip": false,
+        "on-click": "~/.config/eww/scripts/popup-toggle.sh calendar-popup system-popup"
     },
     "hyprland/language": {
-        "format": " {}",
+        "format": "󰌌 {}",
         "format-en": "EN",
         "format-tr": "TR",
         "on-click": "hyprctl switchxkblayout all next"
     },
-    "custom/sysmonitor": {
-        "format": "",
-        "tooltip-format": "Sistem Monitoru",
-        "on-click": "~/.config/hypr/sysmonitor.sh"
+    "custom/system-popup": {
+        "format": "󰒓",
+        "tooltip": false,
+        "on-click": "~/.config/eww/scripts/popup-toggle.sh system-popup calendar-popup"
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-muted": " Sessiz",
+        "format-muted": "󰝟 Sessiz",
         "format-icons": {
             "default": [
-                "",
-                "",
-                ""
+                "󰕿",
+                "󰖀",
+                "󰕾"
             ]
         },
         "on-click": "pavucontrol",
         "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+",
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-    },
-    "network": {
-        "format-wifi": " {signalStrength}%",
-        "format-ethernet": " {ipaddr}",
-        "format-disconnected": " Bagli Degil",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
-        "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
-        "on-click": "nm-connection-editor"
     },
     "battery": {
         "states": {
@@ -103,14 +84,14 @@
             "critical": 15
         },
         "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰚥 {capacity}%",
         "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁹"
         ],
         "tooltip-format": "{timeTo}"
     },
@@ -122,14 +103,14 @@
         "tooltip": false,
         "format": "{icon}",
         "format-icons": {
-            "notification": "",
-            "none": "",
-            "dnd-notification": "",
-            "dnd-none": "",
-            "inhibited-notification": "",
-            "inhibited-none": "",
-            "dnd-inhibited-notification": "",
-            "dnd-inhibited-none": ""
+            "notification": "󰂚",
+            "none": "󰂜",
+            "dnd-notification": "󰂛",
+            "dnd-none": "󰪑",
+            "inhibited-notification": "󰂚",
+            "inhibited-none": "󰂜",
+            "dnd-inhibited-notification": "󰂛",
+            "dnd-inhibited-none": "󰪑"
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
@@ -138,24 +119,14 @@
         "on-click-right": "swaync-client -d -sw",
         "escape": true
     },
-    "bluetooth": {
-        "format": " {status}",
-        "format-connected": " {device_alias}",
-        "format-disabled": "",
-        "format-off": "",
-        "tooltip-format": "{controller_alias}\n{num_connections} bagli cihaz",
-        "tooltip-format-connected": "{controller_alias}\n{num_connections} bagli cihaz\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}",
-        "on-click": "blueman-manager"
-    },
     "mpris": {
         "format": "{player_icon} {artist} - {title}",
         "format-paused": "{player_icon} {artist} - {title}  ⏸",
         "player-icons": {
             "default": "♫",
-            "spotify": "",
-            "firefox": "",
-            "brave": ""
+            "spotify": "󰓇",
+            "firefox": "󰈹",
+            "brave": "󰊯"
         },
         "max-length": 45,
         "on-click": "playerctl play-pause",
@@ -163,14 +134,6 @@
         "on-click-middle": "playerctl previous",
         "on-scroll-up": "playerctl volume 0.05+",
         "on-scroll-down": "playerctl volume 0.05-"
-    },
-    "custom/updates": {
-        "format": "{}",
-        "return-type": "json",
-        "exec": "~/.config/hypr/check-updates.sh",
-        "interval": 1800,
-        "on-click": "kitty -e bash -c 'yay -Syu; echo; echo Tamamlandi. Cikmak icin bir tusa bas...; read'",
-        "tooltip": true
     },
     "custom/media-prev": {
         "format": "⏮",

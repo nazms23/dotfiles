@@ -1,0 +1,260 @@
+// ============================================
+// Catppuccin Mocha Renk Paleti
+// ============================================
+$base: #1e1e2e;
+$mantle: #181825;
+$crust: #11111b;
+$surface0: #313244;
+$surface1: #45475a;
+$surface2: #585b70;
+$overlay0: #6c7086;
+$text: #cdd6f4;
+$subtext0: #a6adc8;
+$subtext1: #bac2de;
+$green: #a6e3a1;
+$teal: #94e2d5;
+$sky: #89dceb;
+$blue: #89b4fa;
+$pink: #f5c2e7;
+$red: #f38ba8;
+$peach: #fab387;
+$yellow: #f9e2af;
+$lavender: #b4befe;
+
+// ============================================
+// GLOBAL — GTK varsayılanlarını override
+// ============================================
+* {
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", sans-serif;
+  font-size: 13px;
+  color: $text;
+}
+
+// ============================================
+// SYSTEM POPUP
+// ============================================
+.system-popup {
+  background-color: rgba(30, 30, 46, 0.95);
+  border: 2px solid $surface0;
+  border-radius: 16px;
+  padding: 16px;
+  min-width: 280px;
+}
+
+.popup-row {
+  background-color: rgba(49, 50, 68, 0.5);
+  border-radius: 12px;
+  padding: 10px 14px;
+  border: none;
+
+  &:hover {
+    background-color: rgba(69, 71, 90, 0.6);
+  }
+}
+
+.popup-icon {
+  font-family: "Symbols Nerd Font", "JetBrainsMono Nerd Font";
+  font-size: 18px;
+  color: $green;
+  min-width: 24px;
+}
+
+.wifi-icon { color: $teal; }
+.bt-icon { color: $blue; }
+.sys-icon { color: $sky; font-size: 14px; }
+.volume-icon { color: $pink; }
+.brightness-icon { color: $yellow; }
+
+.popup-label {
+  color: $text;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.popup-sublabel {
+  color: $subtext0;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 11px;
+}
+
+.popup-metric {
+  color: $text;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+}
+
+.popup-divider {
+  background-color: $surface0;
+  min-height: 1px;
+  margin: 4px 8px;
+}
+
+.popup-icon-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  &:hover .popup-icon {
+    color: $green;
+  }
+}
+
+// Ses & Parlaklık kontrol satırı
+.popup-control-row {
+  padding: 6px 14px;
+  background-color: rgba(49, 50, 68, 0.5);
+  border-radius: 12px;
+}
+
+.popup-ctrl-btn {
+  background-color: $surface1;
+  color: $text;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: bold;
+  min-width: 28px;
+
+  &:hover {
+    background-color: $surface2;
+  }
+}
+
+.popup-ctrl-val {
+  color: $text;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  min-width: 45px;
+}
+
+.popup-ctrl-open {
+  background: transparent;
+  border: none;
+  padding: 0 4px;
+  margin-left: 4px;
+
+  &:hover .popup-icon {
+    color: $green;
+  }
+}
+
+// ============================================
+// CALENDAR POPUP
+// ============================================
+.calendar-popup {
+  background-color: rgba(30, 30, 46, 0.95);
+  border: 2px solid $surface0;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+calendar {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+  color: $text;
+  background-color: transparent;
+  padding: 4px;
+
+  &:selected {
+    color: $base;
+    background-color: $green;
+    border-radius: 50%;
+  }
+
+  &:indeterminate {
+    color: $overlay0;
+  }
+
+  &.header {
+    color: $green;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  &.button {
+    color: $subtext0;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      color: $green;
+      background-color: rgba(49, 50, 68, 0.5);
+    }
+  }
+
+  &.highlight {
+    color: $green;
+    font-weight: bold;
+  }
+
+  &:hover {
+    color: $text;
+  }
+}
+
+// ============================================
+// MASAÜSTÜ WİDGET
+// ============================================
+.desktop-widget {
+  background-color: rgba(30, 30, 46, 0.3);
+  border: 1px solid rgba(49, 50, 68, 0.3);
+  border-radius: 20px;
+  padding: 20px 28px;
+  min-width: 220px;
+}
+
+.dw-time-box {
+  margin-bottom: 0px;
+}
+
+.dw-time {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 52px;
+  font-weight: bold;
+  color: $text;
+}
+
+.dw-time-sec {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 20px;
+  color: $overlay0;
+  margin-top: 20px;
+  margin-left: 4px;
+}
+
+.dw-date {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  color: $subtext0;
+}
+
+.dw-divider {
+  background-color: rgba(69, 71, 90, 0.4);
+  min-height: 1px;
+  margin: 8px 0;
+}
+
+.dw-weather {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 14px;
+  color: $teal;
+}
+
+.dw-sys {
+  padding: 4px 0;
+}
+
+.dw-sys-icon {
+  font-family: "Symbols Nerd Font", "JetBrainsMono Nerd Font";
+  font-size: 16px;
+  color: $green;
+}
+
+.dw-sys-val {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+  color: $subtext1;
+}

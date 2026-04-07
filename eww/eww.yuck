@@ -1,0 +1,153 @@
+; ============================================
+; EWW Config — Catppuccin Mocha Green
+; ============================================
+
+; ---- Değişkenler (polling) ----
+(defpoll time :interval "1s" `date +"%H:%M"`)
+(defpoll time_sec :interval "1s" `date +"%S"`)
+(defpoll date_full :interval "60s" `LANG=tr_TR.UTF-8 date +"%A, %d %B %Y"`)
+(defpoll cpu :interval "3s" `~/.config/eww/scripts/system-info.sh cpu`)
+(defpoll ram :interval "3s" `~/.config/eww/scripts/system-info.sh ram`)
+(defpoll disk :interval "30s" `~/.config/eww/scripts/system-info.sh disk`)
+(defpoll weather :interval "1800s" `~/.config/eww/scripts/weather.sh`)
+(defpoll volume :interval "1s" `~/.config/eww/scripts/system-info.sh volume`)
+(defpoll volume_muted :interval "1s" `~/.config/eww/scripts/system-info.sh volume-muted`)
+(defpoll brightness :interval "2s" `~/.config/eww/scripts/system-info.sh brightness`)
+(defpoll wifi_ssid :interval "5s" `~/.config/eww/scripts/system-info.sh wifi-ssid`)
+(defpoll wifi_signal :interval "5s" `~/.config/eww/scripts/system-info.sh wifi-signal`)
+(defpoll bt_device :interval "5s" `~/.config/eww/scripts/system-info.sh bt-device`)
+(defpoll bt_powered :interval "5s" `~/.config/eww/scripts/system-info.sh bt-powered`)
+(defpoll battery :interval "10s" `~/.config/eww/scripts/system-info.sh battery`)
+(defpoll battery_status :interval "10s" `~/.config/eww/scripts/system-info.sh battery-status`)
+
+
+; ============================================
+; SYSTEM POPUP — Waybar butonuyla açılır
+; ============================================
+(defwidget system-popup-widget []
+  (box :class "system-popup" :orientation "v" :space-evenly false :spacing 12
+
+        ; WiFi
+        (button :class "popup-row" :onclick "networkmanager_dmenu & eww close system-popup"
+          (box :orientation "h" :space-evenly false :spacing 12
+            (label :class "popup-icon wifi-icon" :text "󰤨")
+            (box :orientation "v" :space-evenly false
+              (label :class "popup-label" :halign "start" :text "WiFi")
+              (label :class "popup-sublabel" :halign "start"
+                :text {wifi_ssid != "" ? "${wifi_ssid} (${wifi_signal}%)" : "Bağlı değil"}))))
+
+        ; Bluetooth
+        (button :class "popup-row" :onclick "blueman-manager & eww close system-popup"
+          (box :orientation "h" :space-evenly false :spacing 12
+            (label :class "popup-icon bt-icon" :text {bt_powered == "true" ? "󰂯" : "󰂲"})
+            (box :orientation "v" :space-evenly false
+              (label :class "popup-label" :halign "start" :text "Bluetooth")
+              (label :class "popup-sublabel" :halign "start"
+                :text {bt_device != "" ? bt_device : (bt_powered == "true" ? "Açık" : "Kapalı")}))))
+
+        (box :class "popup-divider")
+
+        ; Ses
+        (box :class "popup-control-row" :orientation "h" :space-evenly false :spacing 8
+          (button :class "popup-icon-btn"
+            :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+            (label :class "popup-icon volume-icon" :text {volume_muted == "true" ? "󰝟" : "󰕾"}))
+          (button :class "popup-ctrl-btn" :onclick "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+            (label :text "−"))
+          (label :class "popup-ctrl-val" :text "${volume}%")
+          (button :class "popup-ctrl-btn" :onclick "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
+            (label :text "+"))
+          (button :class "popup-ctrl-open" :onclick "pavucontrol &"
+            (label :class "popup-icon" :text "󰓃")))
+
+        ; Parlaklık
+        (box :class "popup-control-row" :orientation "h" :space-evenly false :spacing 8
+          (label :class "popup-icon brightness-icon" :text "󰃟")
+          (button :class "popup-ctrl-btn" :onclick "brightnessctl set 5%-"
+            (label :text "−"))
+          (label :class "popup-ctrl-val" :text "${brightness}%")
+          (button :class "popup-ctrl-btn" :onclick "brightnessctl set 5%+"
+            (label :text "+")))
+
+        (box :class "popup-divider")
+
+        ; Sistem
+        (button :class "popup-row" :onclick "~/.config/hypr/sysmonitor.sh & eww close system-popup"
+          (box :orientation "h" :space-evenly false :spacing 16
+            (box :orientation "h" :space-evenly false :spacing 8
+              (label :class "popup-icon sys-icon" :text "")
+              (label :class "popup-metric" :text "${cpu}%"))
+            (box :orientation "h" :space-evenly false :spacing 8
+              (label :class "popup-icon sys-icon" :text "")
+              (label :class "popup-metric" :text "${ram}%"))
+            (box :orientation "h" :space-evenly false :spacing 8
+              (label :class "popup-icon sys-icon" :text "󰋊")
+              (label :class "popup-metric" :text "${disk}%"))))))
+
+(defwindow system-popup
+  :monitor 0
+  :geometry (geometry :x "10px" :y "44px" :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (system-popup-widget))
+
+
+; ============================================
+; CALENDAR POPUP — Waybar saatle açılır
+; ============================================
+(defwidget calendar-popup-widget []
+  (box :class "calendar-popup" :orientation "v" :space-evenly false :spacing 8
+    (calendar :class "cal"
+      :show-heading true
+      :show-day-names true)))
+
+(defwindow calendar-popup
+  :monitor 0
+  :geometry (geometry :x "10px" :y "44px" :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (calendar-popup-widget))
+
+
+; ============================================
+; MASAÜSTÜ WİDGET — Saat + Hava + Sistem
+; ============================================
+(defwidget desktop-widget-content []
+  (box :class "desktop-widget" :orientation "v" :space-evenly false :spacing 4
+
+    ; Saat
+    (box :class "dw-time-box" :orientation "h" :halign "center" :space-evenly false
+      (label :class "dw-time" :text time)
+      (label :class "dw-time-sec" :text time_sec))
+
+    ; Tarih
+    (label :class "dw-date" :text date_full)
+
+    (box :class "dw-divider")
+
+    ; Hava durumu
+    (label :class "dw-weather" :text weather)
+
+    (box :class "dw-divider")
+
+    ; Sistem özeti
+    (box :class "dw-sys" :orientation "h" :halign "center" :space-evenly true :spacing 16
+      (box :orientation "v" :space-evenly false
+        (label :class "dw-sys-icon" :text "")
+        (label :class "dw-sys-val" :text "${cpu}%"))
+      (box :orientation "v" :space-evenly false
+        (label :class "dw-sys-icon" :text "")
+        (label :class "dw-sys-val" :text "${ram}%"))
+      (box :orientation "v" :space-evenly false
+        (label :class "dw-sys-icon" :text "󰋊")
+        (label :class "dw-sys-val" :text "${disk}%")))))
+
+(defwindow desktop-widget
+  :monitor 0
+  :geometry (geometry :x "20px" :y "80px" :anchor "bottom left")
+  :stacking "bg"
+  :exclusive false
+  :focusable false
+  (desktop-widget-content))

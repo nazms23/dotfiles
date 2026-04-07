@@ -6,15 +6,15 @@
             "top": 1
         },
         "color": {
-            "1": "magenta",
-            "2": "blue"
+            "1": "green",
+            "2": "cyan"
         }
     },
     "display": {
         "separator": " → ",
         "color": {
-            "keys": "magenta",
-            "title": "blue"
+            "keys": "green",
+            "title": "cyan"
         }
     },
     "modules": [
