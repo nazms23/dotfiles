@@ -35,7 +35,9 @@ yay -S --needed \
     networkmanager-dmenu-git \
     auto-cpufreq \
     swayosd-git \
-    catppuccin-gtk-theme-mocha
+    catppuccin-gtk-theme-mocha \
+    wlogout \
+    libratbag piper
 
 echo ""
 echo "=== Spicetify kuruluyor ==="
@@ -53,6 +55,7 @@ echo "=== Servisleri etkinlestir ==="
 sudo systemctl enable sddm
 sudo systemctl enable NetworkManager
 systemctl --user enable ydotoold
+sudo systemctl enable ratbagd
 
 echo ""
 echo "Kurulum tamamlandi! Simdi symlink'leri olusturun: ./install.sh"

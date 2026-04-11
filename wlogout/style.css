@@ -1,0 +1,99 @@
+/* Catppuccin Mocha - Wlogout */
+
+@define-color base #1e1e2e;
+@define-color mantle #181825;
+@define-color crust #11111b;
+@define-color text #cdd6f4;
+@define-color subtext0 #a6adc8;
+@define-color surface0 #313244;
+@define-color surface1 #45475a;
+@define-color surface2 #585b70;
+@define-color green #a6e3a1;
+@define-color teal #94e2d5;
+@define-color red #f38ba8;
+@define-color peach #fab387;
+@define-color yellow #f9e2af;
+@define-color blue #89b4fa;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+}
+
+window {
+    background-color: rgba(17, 17, 27, 0.80);
+}
+
+button {
+    color: @subtext0;
+    background-color: rgba(30, 30, 46, 0.0);
+    border: none;
+    border-radius: 24px;
+    background-repeat: no-repeat;
+    background-position: center 35%;
+    background-size: 35%;
+    margin: 12px;
+    padding: 0;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+button:hover {
+    background-color: rgba(49, 50, 68, 0.6);
+    border: 2px solid @surface2;
+}
+
+button:focus {
+    background-color: rgba(49, 50, 68, 0.4);
+    outline: none;
+}
+
+/* Lock */
+#lock {
+    background-image: url("/home/sudouy/.config/wlogout/icons/lock.svg");
+}
+#lock:hover {
+    color: @green;
+    border-color: @green;
+    text-shadow: 0 0 8px alpha(@green, 0.5);
+}
+
+/* Logout */
+#logout {
+    background-image: url("/home/sudouy/.config/wlogout/icons/logout.svg");
+}
+#logout:hover {
+    color: @peach;
+    border-color: @peach;
+    text-shadow: 0 0 8px alpha(@peach, 0.5);
+}
+
+/* Suspend */
+#suspend {
+    background-image: url("/home/sudouy/.config/wlogout/icons/suspend.svg");
+}
+#suspend:hover {
+    color: @blue;
+    border-color: @blue;
+    text-shadow: 0 0 8px alpha(@blue, 0.5);
+}
+
+/* Reboot */
+#reboot {
+    background-image: url("/home/sudouy/.config/wlogout/icons/reboot.svg");
+}
+#reboot:hover {
+    color: @yellow;
+    border-color: @yellow;
+    text-shadow: 0 0 8px alpha(@yellow, 0.5);
+}
+
+/* Shutdown */
+#shutdown {
+    background-image: url("/home/sudouy/.config/wlogout/icons/shutdown.svg");
+}
+#shutdown:hover {
+    color: @red;
+    border-color: @red;
+    text-shadow: 0 0 8px alpha(@red, 0.5);
+}

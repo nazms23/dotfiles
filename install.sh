@@ -5,7 +5,7 @@
 DOTFILES="$HOME/dotfiles"
 
 echo "=== Dizinler olusturuluyor ==="
-mkdir -p ~/.config/{hypr,waybar,rofi,kitty,swaync,fastfetch,Kvantum,networkmanager-dmenu,kando,waypaper,eww/scripts}
+mkdir -p ~/.config/{hypr,waybar,rofi,kitty,swaync,fastfetch,Kvantum,networkmanager-dmenu,kando,waypaper,eww/scripts,wlogout,btop/themes}
 mkdir -p ~/.local/share/applications
 
 echo "=== Symlink'ler olusturuluyor ==="
@@ -54,6 +54,17 @@ ln -sf "$DOTFILES/eww/eww.yuck" ~/.config/eww/eww.yuck
 ln -sf "$DOTFILES/eww/eww.scss" ~/.config/eww/eww.scss
 for f in "$DOTFILES"/eww/scripts/*; do
     ln -sf "$f" ~/.config/eww/scripts/$(basename "$f")
+done
+
+# Wlogout
+for f in "$DOTFILES"/wlogout/*; do
+    ln -sf "$f" ~/.config/wlogout/$(basename "$f")
+done
+
+# Btop
+ln -sf "$DOTFILES/btop/btop.conf" ~/.config/btop/btop.conf
+for f in "$DOTFILES"/btop/themes/*; do
+    ln -sf "$f" ~/.config/btop/themes/$(basename "$f")
 done
 
 # Steam (NVIDIA Prime)

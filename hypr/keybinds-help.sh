@@ -23,7 +23,7 @@ $S
 <span $K>SUPER + Q</span>              <span $V>Terminal ac (Kitty)</span>
 <span $K>SUPER + R</span>              <span $V>Uygulama baslat (Rofi)</span>
 <span $K>SUPER + E</span>              <span $V>Dosya yoneticisi</span>
-<span $K>SUPER + M</span>              <span $V>Guc menusu</span>
+<span $K>SUPER + M</span>              <span $V>Guc menusu (wlogout)</span>
 <span $K>SUPER + H</span>              <span $V>Bu yardim penceresi</span>
 <span $K>SUPER + W</span>              <span $V>Duvar kagidi degistir</span>
 
@@ -73,7 +73,7 @@ $S
 
 <span $H>Ekran ve Guvenlik</span>
 <span $K>SUPER + L</span>              <span $V>Ekrani kilitle (Hyprlock)</span>
-<span $K>SUPER + M</span>              <span $V>Guc menusu (kapat/uyku/yeniden baslat)</span>
+<span $K>SUPER + M</span>              <span $V>Wlogout (kapat/uyku/yeniden baslat)</span>
 
 $S
 
@@ -157,6 +157,8 @@ $S
 <span $V>EWW</span>             →  <span $K>Masaustu widget sistemi</span>
 <span $V>SwayOSD</span>         →  <span $K>Ses/parlaklik ekran gostergesi</span>
 <span $V>Hyprexpo</span>        →  <span $K>Workspace kus bakisi</span>
+<span $V>Btop</span>            →  <span $K>Sistem monitoru (Catppuccin temali)</span>
+<span $V>Wlogout</span>         →  <span $K>Guc/cikis menusu</span>
 
 $S
 
