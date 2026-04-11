@@ -8,11 +8,11 @@
 @define-color overlay0 #6c7086;
 @define-color text #cdd6f4;
 @define-color subtext0 #a6adc8;
-@define-color mauve #cba6f7;
-@define-color pink #f5c2e7;
+@define-color green #a6e3a1;
+@define-color teal #94e2d5;
 @define-color red #f38ba8;
 @define-color peach #fab387;
-@define-color green #a6e3a1;
+@define-color yellow #f9e2af;
 @define-color blue #89b4fa;
 @define-color lavender #b4befe;
 
@@ -22,12 +22,12 @@
     font-size: 13px;
 }
 
-/* Control Center */
+/* ── Control Center ── */
 .control-center {
-    background: alpha(@base, 0.92);
-    border: 2px solid @surface0;
-    border-radius: 16px;
-    padding: 12px;
+    background: alpha(@base, 0.88);
+    border: 1px solid alpha(@surface1, 0.6);
+    border-radius: 18px;
+    padding: 14px;
     color: @text;
 }
 
@@ -35,14 +35,20 @@
     margin: 4px 0;
 }
 
-/* Notifications */
+/* ── Notification Cards ── */
 .notification {
-    background: @surface0;
-    border-radius: 12px;
-    border: 1px solid @surface1;
-    padding: 8px;
-    margin: 4px 0;
+    background: alpha(@surface0, 0.7);
+    border-radius: 14px;
+    border: 1px solid alpha(@surface1, 0.4);
+    padding: 10px 12px;
+    margin: 6px 0;
     color: @text;
+    transition: all 0.2s ease;
+}
+
+.notification:hover {
+    background: alpha(@surface0, 0.9);
+    border-color: alpha(@green, 0.3);
 }
 
 .notification .summary {
@@ -54,6 +60,7 @@
 .notification .body {
     color: @subtext0;
     font-size: 12px;
+    margin-top: 4px;
 }
 
 .notification .time {
@@ -62,15 +69,18 @@
 }
 
 .notification.critical {
-    border: 1px solid @red;
+    border: 1px solid alpha(@red, 0.6);
 }
 
 .notification .close-button {
-    background: @surface1;
-    color: @text;
-    border-radius: 8px;
-    padding: 2px 8px;
+    background: alpha(@surface1, 0.6);
+    color: @subtext0;
+    border-radius: 50%;
+    min-width: 24px;
+    min-height: 24px;
+    padding: 0;
     border: none;
+    transition: all 0.2s ease;
 }
 
 .notification .close-button:hover {
@@ -78,48 +88,60 @@
     color: @base;
 }
 
-/* Floating notifications */
+/* ── Floating notifications (popup) ── */
 .floating-notifications {
     background: transparent;
 }
 
 .floating-notifications .notification {
-    background: alpha(@base, 0.92);
-    border: 1px solid @surface1;
+    background: alpha(@base, 0.90);
+    border: 1px solid alpha(@surface1, 0.5);
+    border-radius: 14px;
+    box-shadow: 0 4px 16px alpha(@crust, 0.4);
 }
 
-/* Widgets */
+.floating-notifications .notification:hover {
+    border-color: alpha(@green, 0.4);
+}
+
+/* ── Title Widget ── */
 .widget-title {
     color: @green;
     font-weight: bold;
     font-size: 15px;
-    margin: 4px 8px;
+    margin: 6px 8px 2px 8px;
 }
 
 .widget-title button {
-    background: @surface1;
-    color: @text;
-    border-radius: 8px;
-    padding: 4px 12px;
-    border: none;
+    background: alpha(@surface1, 0.5);
+    color: @subtext0;
+    border-radius: 10px;
+    padding: 4px 14px;
+    border: 1px solid alpha(@surface2, 0.3);
+    font-size: 12px;
+    transition: all 0.2s ease;
 }
 
 .widget-title button:hover {
     background: @green;
     color: @base;
+    border-color: @green;
 }
 
-/* DND Toggle */
+/* ── DND Toggle ── */
 .widget-dnd {
-    margin: 4px 8px;
-    padding: 4px;
-    color: @text;
+    margin: 6px 8px;
+    padding: 6px 0;
+    color: @subtext0;
+    font-size: 13px;
 }
 
 .widget-dnd > switch {
     background: @surface1;
     border-radius: 20px;
     border: none;
+    min-width: 46px;
+    min-height: 22px;
 }
 
 .widget-dnd > switch:checked {
@@ -129,20 +151,24 @@
 .widget-dnd > switch slider {
     background: @text;
     border-radius: 50%;
+    min-width: 18px;
+    min-height: 18px;
+    margin: 2px;
 }
 
-/* Inhibitors */
+/* ── Inhibitors ── */
 .widget-inhibitors {
     margin: 4px 8px;
     color: @text;
 }
 
 .widget-inhibitors button {
-    background: @surface1;
+    background: alpha(@surface1, 0.5);
     color: @text;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 4px 12px;
     border: none;
+    transition: all 0.2s ease;
 }
 
 .widget-inhibitors button:hover {

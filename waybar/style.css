@@ -44,7 +44,18 @@ tooltip {
     color: @text;
 }
 
-/* Module styling */
+/* ── Floating bar containers ── */
+.modules-left,
+.modules-center,
+.modules-right {
+    background: alpha(@base, 0.82);
+    border: 1px solid alpha(@surface1, 0.5);
+    border-radius: 14px;
+    padding: 0 6px;
+    margin: 0 4px;
+}
+
+/* ── Module styling ── */
 #window,
 #taskbar,
 #clock,
@@ -54,10 +65,22 @@ tooltip {
 #language,
 #tray,
 #custom-notification {
-    padding: 0 12px;
+    padding: 0 10px;
     margin: 4px 2px;
     border-radius: 10px;
-    background: alpha(@base, 0.85);
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+/* Hover glow */
+#clock:hover,
+#battery:hover,
+#pulseaudio:hover,
+#language:hover,
+#custom-system-popup:hover,
+#custom-notification:hover,
+#tray:hover {
+    background: alpha(@surface0, 0.5);
 }
 
 /* Window title */
@@ -86,7 +109,7 @@ tooltip {
 }
 
 #taskbar button.active {
-    background: alpha(@green, 0.25);
+    background: alpha(@green, 0.2);
     border-bottom: 2px solid @green;
 }
 
