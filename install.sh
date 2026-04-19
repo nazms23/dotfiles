@@ -5,7 +5,7 @@
 DOTFILES="$HOME/dotfiles"
 
 echo "=== Dizinler olusturuluyor ==="
-mkdir -p ~/.config/{hypr,waybar,rofi,kitty,swaync,fastfetch,Kvantum,networkmanager-dmenu,kando,waypaper,eww/scripts,wlogout,btop/themes}
+mkdir -p ~/.config/{hypr,waybar,rofi,kitty,swaync,fastfetch,Kvantum,networkmanager-dmenu,kando,waypaper,eww/scripts,wlogout,btop/themes,nvim/lua/{config,plugins}}
 mkdir -p ~/.local/share/applications
 
 echo "=== Symlink'ler olusturuluyor ==="
@@ -59,6 +59,15 @@ done
 # Wlogout
 for f in "$DOTFILES"/wlogout/*; do
     ln -sf "$f" ~/.config/wlogout/$(basename "$f")
+done
+
+# Neovim
+ln -sf "$DOTFILES/nvim/init.lua" ~/.config/nvim/init.lua
+for f in "$DOTFILES"/nvim/lua/config/*; do
+    ln -sf "$f" ~/.config/nvim/lua/config/$(basename "$f")
+done
+for f in "$DOTFILES"/nvim/lua/plugins/*; do
+    ln -sf "$f" ~/.config/nvim/lua/plugins/$(basename "$f")
 done
 
 # Btop

@@ -12,6 +12,7 @@ sudo pacman -S --needed \
     grim slurp wl-clipboard cliphist \
     playerctl brightnessctl \
     blueman pavucontrol \
+    neovim \
     btop fastfetch yad \
     ydotool \
     steam spotify-launcher \

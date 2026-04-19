@@ -1,0 +1,19 @@
+return {
+  "lukas-reineke/indent-blankline.nvim",
+  main = "ibl",
+  event = "BufReadPost",
+  opts = {
+    indent = {
+      char = "│",
+      tab_char = "│",
+    },
+    scope = {
+      enabled = true,
+      show_start = false,
+      show_end = false,
+    },
+    exclude = {
+      filetypes = { "alpha", "neo-tree", "help", "lazy", "mason", "toggleterm" },
+    },
+  },
+}

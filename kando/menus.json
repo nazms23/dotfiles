@@ -26,7 +26,20 @@
                 "name": "Google Chrome",
                 "icon": "google-chrome",
                 "iconTheme": "system",
-                "angle": 63
+                "angle": 15
+              },
+              {
+                "type": "command",
+                "data": {
+                  "command": "/home/sudouy/.local/bin/yaptodom ",
+                  "detached": true,
+                  "isolated": false,
+                  "delayed": false
+                },
+                "name": "YapTODOm",
+                "icon": "/home/sudouy/.local/share/icons/hicolor/512x512/apps/yaptodom.png  ",
+                "iconTheme": "base64",
+                "angle": 75
               },
               {
                 "type": "command",
@@ -39,7 +52,7 @@
                 "name": "Steam",
                 "icon": "steam",
                 "iconTheme": "system",
-                "angle": 207
+                "angle": 216
               },
               {
                 "type": "command",
@@ -65,7 +78,7 @@
                 "name": "Spotify (Launcher)",
                 "icon": "spotify-launcher",
                 "iconTheme": "system",
-                "angle": 351
+                "angle": 330
               }
             ],
             "angle": 315
@@ -108,7 +121,7 @@
                 "iconTheme": "material-symbols-rounded"
               }
             ],
-            "angle": 0
+            "angle": 360
           },
           {
             "type": "submenu",
@@ -153,7 +166,7 @@
                 "iconTheme": "simple-icons"
               }
             ],
-            "angle": 45
+            "angle": 405
           },
           {
             "type": "hotkey",
@@ -164,7 +177,7 @@
             "name": "Next Workspace",
             "icon": "arrow_forward",
             "iconTheme": "material-symbols-rounded",
-            "angle": 90
+            "angle": 450
           },
           {
             "type": "submenu",
@@ -217,7 +230,7 @@
                 "angle": 270
               }
             ],
-            "angle": 135
+            "angle": 495
           },
           {
             "type": "submenu",
@@ -270,7 +283,7 @@
                 "angle": 270
               }
             ],
-            "angle": 180
+            "angle": 540
           },
           {
             "type": "submenu",
@@ -302,13 +315,13 @@
               },
               {
                 "type": "hotkey",
-                "name": "Widget Kapat",
-                "icon": "widgets",
-                "iconTheme": "material-symbols-rounded",
                 "data": {
                   "hotkey": "MetaLeft+KeyG",
                   "delayed": true
-                }
+                },
+                "name": "Widget Kapat",
+                "icon": "widgets",
+                "iconTheme": "material-symbols-rounded"
               },
               {
                 "type": "hotkey",
@@ -322,7 +335,7 @@
                 "angle": 510
               }
             ],
-            "angle": 225
+            "angle": 585
           },
           {
             "type": "hotkey",
@@ -333,7 +346,7 @@
             "name": "Previous Workspace",
             "icon": "arrow_back",
             "iconTheme": "material-symbols-rounded",
-            "angle": 270
+            "angle": 630
           }
         ]
       },
