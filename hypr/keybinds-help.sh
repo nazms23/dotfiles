@@ -5,7 +5,7 @@ cat > "$CSS_FILE" << 'CSSEOF'
 * { font-family: "JetBrainsMono Nerd Font", monospace; }
 window { background-color: #1e1e2e; border-radius: 16px; }
 .dialog-text { color: #cdd6f4; font-size: 13px; }
-button { background-color: #313244; color: #a6e3a1; border: 1px solid #45475a; border-radius: 8px; padding: 8px 20px; font-weight: bold; }
+button { background-color: #313244; color: #a5d396; border: 1px solid #45475a; border-radius: 8px; padding: 8px 20px; font-weight: bold; }
 button:hover { background-color: #45475a; }
 CSSEOF
 
@@ -13,7 +13,7 @@ S='<span foreground="#585b70">━━━━━━━━━━━━━━━━�
 K='foreground="#89b4fa"'
 V='foreground="#cdd6f4"'
 H='foreground="#94e2d5" weight="bold" size="large"'
-A='foreground="#a6e3a1"'
+A='foreground="#a5d396"'
 
 PAGE1="<span font=\"16\" $A weight=\"bold\">SAYFA 1/5 — Genel ve Pencere</span>
 
@@ -101,7 +101,6 @@ $S
 
 <span $H>EWW Widgetlar</span>
 <span $K>SUPER + G</span>              <span $V>Masaustu widgeti goster/gizle</span>
-<span $K>SUPER + A</span>              <span $V>Workspace overview (Hyprexpo)</span>
 <span $K>Waybar saat tikla</span>      <span $V>Takvim popup</span>
 <span $K>Waybar disli tikla</span>     <span $V>Sistem popup (WiFi/BT/Ses/Parlaklik)</span>
 
@@ -156,7 +155,6 @@ $S
 <span $V>Kvantum</span>         →  <span $K>Qt tema motoru (Catppuccin)</span>
 <span $V>EWW</span>             →  <span $K>Masaustu widget sistemi</span>
 <span $V>SwayOSD</span>         →  <span $K>Ses/parlaklik ekran gostergesi</span>
-<span $V>Hyprexpo</span>        →  <span $K>Workspace kus bakisi</span>
 <span $V>Btop</span>            →  <span $K>Sistem monitoru (Catppuccin temali)</span>
 <span $V>Wlogout</span>         →  <span $K>Guc/cikis menusu</span>
 

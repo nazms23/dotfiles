@@ -1,5 +1,5 @@
 {
-  "version": "2.2.0",
+  "version": "2.3.1",
   "menus": [
     {
       "root": {
@@ -44,6 +44,19 @@
               {
                 "type": "command",
                 "data": {
+                  "command": "rofi -show calc -modi calc -no-show-match -no-sort -calc-command \"echo -n '{result}' | wl-copy\" ",
+                  "detached": true,
+                  "isolated": false,
+                  "delayed": false
+                },
+                "name": "Komut Çalıştır",
+                "icon": "calculate",
+                "iconTheme": "material-symbols-rounded",
+                "angle": 180
+              },
+              {
+                "type": "command",
+                "data": {
                   "command": "/usr/bin/steam",
                   "detached": true,
                   "isolated": false,
@@ -52,7 +65,7 @@
                 "name": "Steam",
                 "icon": "steam",
                 "iconTheme": "system",
-                "angle": 216
+                "angle": 225
               },
               {
                 "type": "command",

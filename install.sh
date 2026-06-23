@@ -79,6 +79,9 @@ done
 # Steam (NVIDIA Prime)
 ln -sf "$DOTFILES/applications/steam.desktop" ~/.local/share/applications/steam.desktop
 
+# Kando (Hyprland global-shortcuts icin gerekli app id .desktop dosyasi)
+ln -sf "$DOTFILES/applications/menu.kando.Kando.desktop" ~/.local/share/applications/menu.kando.Kando.desktop
+
 # Bashrc
 ln -sf "$DOTFILES/bashrc" ~/.bashrc
 

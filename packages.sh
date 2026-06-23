@@ -21,7 +21,7 @@ sudo pacman -S --needed \
     ttf-jetbrains-mono-nerd noto-fonts-emoji \
     zip unzip \
     github-cli \
-    eww \
+    alsa-utils \
     nwg-look
 
 echo ""
@@ -31,6 +31,8 @@ yay -S --needed \
     hyprswitch \
     waypaper \
     kando-bin \
+    eww-git \
+    rofi-calc \
     catppuccin-cursors-mocha \
     kvantum-theme-catppuccin-git \
     networkmanager-dmenu-git \

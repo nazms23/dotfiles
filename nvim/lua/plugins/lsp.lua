@@ -29,7 +29,6 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- Keybindings on LSP attach
@@ -64,8 +63,8 @@ return {
         virtual_text = { prefix = "●" },
       })
 
-      -- Server configs
-      lspconfig.omnisharp.setup({
+      -- Server configs (new vim.lsp.config API)
+      vim.lsp.config("omnisharp", {
         capabilities = capabilities,
         cmd = { "omnisharp" },
         settings = {
@@ -74,19 +73,19 @@ return {
         },
       })
 
-      lspconfig.ts_ls.setup({
+      vim.lsp.config("ts_ls", {
         capabilities = capabilities,
       })
 
-      lspconfig.eslint.setup({
+      vim.lsp.config("eslint", {
         capabilities = capabilities,
       })
 
-      lspconfig.tailwindcss.setup({
+      vim.lsp.config("tailwindcss", {
         capabilities = capabilities,
       })
 
-      lspconfig.lua_ls.setup({
+      vim.lsp.config("lua_ls", {
         capabilities = capabilities,
         settings = {
           Lua = {
@@ -96,6 +95,8 @@ return {
           },
         },
       })
+
+      vim.lsp.enable({ "omnisharp", "ts_ls", "eslint", "tailwindcss", "lua_ls" })
     end,
   },
 }
