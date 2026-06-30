@@ -89,6 +89,13 @@ $S
 
 $S
 
+<span $H>OCR / Metin Tanima</span>
+<span $K>SUPER + SHIFT + T</span>      <span $V>Alan secip metni tani (Ingilizce)</span>
+<span $K>SUPER + SHIFT + J</span>      <span $V>Alan secip metni tani (Japonca)</span>
+<span $K>SUPER + SHIFT + O</span>      <span $V>OCR dil secici (Rofi menu)</span>
+
+$S
+
 <span $H>Kando Pie Menu</span>
 <span $K>SUPER + D</span>              <span $V>Kando radial menuyu ac</span>
 

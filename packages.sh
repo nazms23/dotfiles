@@ -10,6 +10,7 @@ sudo pacman -S --needed \
     awww \
     kvantum \
     grim slurp wl-clipboard cliphist \
+    tesseract tesseract-data-eng tesseract-data-jpn tesseract-data-jpn_vert tesseract-data-tur \
     playerctl brightnessctl \
     blueman pavucontrol \
     neovim \
