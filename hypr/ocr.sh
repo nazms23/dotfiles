@@ -3,22 +3,24 @@
 # Secilen alandaki yaziyi tanir, panoya kopyalar ve bildirim gosterir.
 #
 # Kullanim:
-#   ocr.sh           -> Ingilizce (varsayilan)
+#   ocr.sh           -> Otomatik dil algilama (varsayilan)
+#   ocr.sh auto      -> Otomatik (OSD ile yazi turunu algila)
 #   ocr.sh eng       -> Ingilizce
 #   ocr.sh jpn       -> Japonca
 #   ocr.sh tur       -> Turkce
-#   ocr.sh eng+jpn   -> Birlikte
+#   ocr.sh eng+jpn   -> Birlikte dene
 #   ocr.sh menu      -> Rofi ile dil sec
 
 set -uo pipefail
 
-OCR_LANG="${1:-eng}"
+OCR_LANG="${1:-auto}"
 
 # Rofi ile dil secimi
 if [ "$OCR_LANG" = "menu" ]; then
-    CHOICE=$(printf "Ingilizce\nJaponca\nTurkce\nIngilizce + Japonca" \
+    CHOICE=$(printf "Otomatik\nIngilizce\nJaponca\nTurkce\nIngilizce + Japonca" \
         | rofi -dmenu -i -p "OCR dili")
     case "$CHOICE" in
+        "Otomatik")             OCR_LANG="auto" ;;
         "Ingilizce")            OCR_LANG="eng" ;;
         "Japonca")              OCR_LANG="jpn" ;;
         "Turkce")               OCR_LANG="tur" ;;
@@ -43,6 +45,17 @@ GEOM=$(slurp -d) || exit 0
 [ -z "$GEOM" ] && exit 0
 
 grim -g "$GEOM" "$TMP"
+
+# Otomatik mod: once yazi turunu (script) algila, ona gore dil sec
+if [ "$OCR_LANG" = "auto" ]; then
+    DETECT=$(tesseract "$TMP" - --psm 0 2>/dev/null \
+        | awk -F': ' '/^Script:/{print $2}' | tr -d '[:space:]')
+    case "$DETECT" in
+        Japanese|Han|Hiragana|Katakana) OCR_LANG="jpn" ;;
+        Latin)                          OCR_LANG="eng" ;;
+        *)                              OCR_LANG="eng+jpn" ;;  # algilanamazsa ikisini dene
+    esac
+fi
 
 # Metni tani, bas-son bosluklari ve bos satirlari temizle
 TEXT=$(tesseract "$TMP" - -l "$OCR_LANG" 2>/dev/null | sed '/^[[:space:]]*$/d')
