@@ -17,7 +17,7 @@ sudo pacman -S --needed \
     btop fastfetch yad \
     ydotool \
     steam spotify-launcher \
-    nvidia-open-dkms nvidia-utils \
+    nvidia-open-dkms nvidia-utils nvidia-prime \
     xdg-desktop-portal-hyprland \
     ttf-jetbrains-mono-nerd noto-fonts-emoji \
     zip unzip \
