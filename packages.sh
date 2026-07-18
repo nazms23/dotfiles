@@ -23,6 +23,7 @@ sudo pacman -S --needed \
     zip unzip \
     github-cli \
     alsa-utils \
+    earlyoom \
     nwg-look
 
 echo ""
@@ -55,11 +56,18 @@ hyprpm enable hyprexpo
 hyprpm reload
 
 echo ""
+echo "=== earlyoom config (RAM tukenince donma yerine sizan process'i oldur) ==="
+sudo tee /etc/default/earlyoom >/dev/null <<'EOF'
+EARLYOOM_ARGS="-r 3600 -m 10 -s 8 --prefer '(^|/)Discord$' --avoid '(^|/)(Hyprland|Xorg|Xwayland|systemd|sshd|wireplumber|pipewire|gamescope)$' -n"
+EOF
+
+echo ""
 echo "=== Servisleri etkinlestir ==="
 sudo systemctl enable sddm
 sudo systemctl enable NetworkManager
 systemctl --user enable ydotoold
 sudo systemctl enable ratbagd
+sudo systemctl enable --now earlyoom
 
 echo ""
 echo "Kurulum tamamlandi! Simdi symlink'leri olusturun: ./install.sh"
