@@ -41,6 +41,20 @@ Tam liste ve kurulum sırası `packages.sh` içinde (pacman + AUR + yamalı hypr
 `rofi/colors.rasi`, `hypr/accent.lua`, `kitty/colors-accent.conf`...). Config'ler bunları
 import eder; üretilen dosyalar git dışında, symlink'ler kırılmaz. `reset-accent.sh`: Catppuccin Green.
 
+## Kendi uygulamalarım
+
+Rice'a özel, sıfırdan yazılmış uygulamalar (Python + GTK4/libadwaita, Türkçe, GPL-3.0).
+Accent rengi wallpaper'la canlı değişir. Her biri ayrı repo; `packages.sh` hepsini `~/Projects` altına indirip kurar.
+
+| Uygulama | Repo | Durum |
+|---|---|---|
+| Hesap makinesi | [nazms23/hesap-makinesi](https://github.com/nazms23/hesap-makinesi) | ✅ |
+| Görsel görüntüleyici | — | yapılıyor |
+| Video oynatıcı | — | planlandı |
+| Dosya yöneticisi | — | planlandı |
+
+Accent rengi `hypr/accent-apply.sh` → `~/.config/accent/colors.css`; Hyprland pencere kuralları `hypr/hyprland.lua`'da.
+
 ## Kurulum
 
 ```bash

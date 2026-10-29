@@ -72,15 +72,6 @@ done
 # Steam (NVIDIA Prime)
 ln -sf "$DOTFILES/applications/steam.desktop" ~/.local/share/applications/steam.desktop
 
-# Yuva uygulamalari (kendi uygulama setimiz: apps/)
-mkdir -p ~/.local/bin
-for f in "$DOTFILES"/apps/bin/*; do
-    ln -sf "$f" ~/.local/bin/$(basename "$f")
-done
-for f in "$DOTFILES"/applications/yuva-*.desktop; do
-    ln -sf "$f" ~/.local/share/applications/$(basename "$f")
-done
-
 # Spotify (acilista spicetify temasi silinmisse otomatik yeniden uygular)
 ln -sf "$DOTFILES/applications/spotify-launcher.desktop" ~/.local/share/applications/spotify-launcher.desktop
 

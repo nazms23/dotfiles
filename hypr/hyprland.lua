@@ -285,7 +285,7 @@ bind(mainMod .. " + D", hl.dsp.global("kando:example-menu"), "Genel: Kando pie m
 bind(mainMod .. " + W", hl.dsp.exec_cmd("waypaper --backend awww --folder ~/Wallpapers"), "Genel: Duvar kağıdı seç (accent otomatik)")
 bind(mainMod .. " + H", hl.dsp.exec_cmd("~/.config/hypr/keybinds-help.sh"), "Genel: Bu yardım ekranı")
 bind(mainMod .. " + F1", hl.dsp.exec_cmd("~/.config/hypr/gamemode.sh toggle"), "Genel: Oyun modu (blur/animasyon/gölge kapat-aç)")
-bind("XF86Calculator", hl.dsp.exec_cmd("~/.local/bin/yuva-hesap"), "Genel: [Hesap makinesi tuşu] Yuva Hesap")
+bind("XF86Calculator", hl.dsp.exec_cmd("~/.local/bin/hesap-makinesi"), "Genel: [Hesap makinesi tuşu] Hesap makinesi")
 
 -- Pencere
 bind(mainMod .. " + C", hl.dsp.window.close(), "Pencere: Kapat")
@@ -441,10 +441,10 @@ hl.window_rule({
     center = true,
 })
 
--- Yuva Hesap: kucuk yuzen pencere
+-- Hesap makinesi (github.com/nazms23/hesap-makinesi): kucuk yuzen pencere
 hl.window_rule({
-    name   = "yuva-hesap-float",
-    match  = { class = "^(tr\\.yuva\\.Hesap)$" },
+    name   = "hesap-makinesi-float",
+    match  = { class = "^(io\\.github\\.nazms23\\.HesapMakinesi)$" },
     float  = true,
     size   = { 380, 600 },
     center = true,

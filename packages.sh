@@ -51,6 +51,14 @@ echo "=== hyprswitch (yerel yamali PKGBUILD, Hyprland 0.57 uyumu) ==="
 (cd "$(dirname "$(readlink -f "$0")")/pkgbuilds/hyprswitch" && makepkg -si --needed --noconfirm)
 
 echo ""
+echo "=== Kendi uygulamalarimiz (ayri repolar -> ~/Projects, her biri kendi install.sh'i ile) ==="
+mkdir -p ~/Projects
+for app in hesap-makinesi; do
+    [ -d ~/Projects/"$app" ] || git clone "https://github.com/nazms23/$app.git" ~/Projects/"$app"
+    ~/Projects/"$app"/install.sh
+done
+
+echo ""
 echo "=== earlyoom config (RAM tukenince donma yerine sizan process'i oldur) ==="
 sudo tee /etc/default/earlyoom >/dev/null <<'EOF'
 EARLYOOM_ARGS="-r 3600 -m 10 -s 8 --prefer '(^|/)Discord$' --avoid '(^|/)(Hyprland|Xorg|Xwayland|systemd|sshd|wireplumber|pipewire|gamescope)$' -n"
