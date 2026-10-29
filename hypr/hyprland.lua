@@ -313,6 +313,36 @@ for i = 1, 10 do
     bind(mainMod .. " + " .. key,         hl.dsp.focus({ workspace = i }),       i == 1 and "Workspace: [SUPER + 1…0] Workspace'e git" or nil)
     bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }), i == 1 and "Workspace: [SUPER + SHIFT + 1…0] Pencereyi workspace'e taşı" or nil)
 end
+-- Scratchpad: gizli workspace. Pencere oraya gidince ortada yuzen (%70) olur,
+-- geri alininca eski haline (doseli/yuzen) doner. Durum tablosu reload'da sifirlanir.
+local SCRATCH = "special:scratch"
+local scratch_was_tiled = {}
+
+bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("scratch"), "Workspace: Scratchpad'i göster / gizle")
+bind(mainMod .. " + CTRL + S", function()
+    local win = hl.get_active_window()
+    if not win then return end
+    local sel = "address:" .. win.address
+
+    if win.workspace and win.workspace.name == SCRATCH then
+        local ws = hl.get_active_workspace()
+        hl.dispatch(hl.dsp.window.move({ window = sel, workspace = ws.id }))
+        if scratch_was_tiled[win.address] then
+            hl.dispatch(hl.dsp.window.float({ window = sel, action = "disable" }))
+        end
+        scratch_was_tiled[win.address] = nil
+    else
+        scratch_was_tiled[win.address] = not win.floating
+        hl.dispatch(hl.dsp.window.move({ window = sel, workspace = SCRATCH, follow = false }))
+        hl.dispatch(hl.dsp.window.float({ window = sel, action = "enable" }))
+        if win.monitor then
+            hl.dispatch(hl.dsp.window.resize({ window = sel, x = math.floor(win.monitor.width * 0.7),
+                                               y = math.floor(win.monitor.height * 0.7), relative = false }))
+        end
+        hl.dispatch(hl.dsp.window.center({ window = sel }))
+    end
+end, "Workspace: Pencereyi scratchpad'e at / geri al")
+
 bind(mainMod .. " + Tab",         hl.dsp.focus({ workspace = "+1" }), "Workspace: Sonraki")
 bind(mainMod .. " + SHIFT + Tab", hl.dsp.focus({ workspace = "-1" }), "Workspace: Önceki")
 bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }), "Workspace: [SUPER + Tekerlek] Workspace'ler arası gez")

@@ -66,6 +66,7 @@ Yeni bind eklerken `description = "Kategori: Ne yapar"` yazmak yeterli.
 | `SUPER + H` | Kısayol yardımı |
 | `SUPER + N` | Kontrol merkezi |
 | `SUPER + A` | Workspace genel bakış |
+| `SUPER + S` / `SUPER + CTRL + S` | Scratchpad göster-gizle / pencereyi at-geri al |
 | `SUPER + F1` | Oyun modu |
 | `ALT + TAB` | Pencere geçişi |
 | `SUPER + SHIFT + S` | Ekran görüntüsü (bildirimden Düzenle/Kaydet) |
