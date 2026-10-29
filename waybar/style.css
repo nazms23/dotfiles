@@ -11,20 +11,15 @@
 @define-color text #cdd6f4;
 @define-color subtext0 #a6adc8;
 @define-color subtext1 #bac2de;
-@define-color rosewater #f5e0dc;
-@define-color flamingo #f2cdcd;
-@define-color pink #f5c2e7;
-@define-color mauve #cba6f7;
 @define-color red #f38ba8;
-@define-color maroon #eba0ac;
 @define-color peach #fab387;
 @define-color yellow #f9e2af;
-@define-color green #a6e3a1;
-@define-color teal #94e2d5;
-@define-color sky #89dceb;
-@define-color sapphire #74c7ec;
-@define-color blue #89b4fa;
-@define-color lavender #b4befe;
+
+/*
+ * Renk kurali: moduller metin renginde, accent (wallpaper'dan) vurgu icin,
+ * sari/kirmizi/seftali SADECE durum bildirir (dusuk pil, riskli guncelleme...).
+ * Boylece her wallpaper'da cakismayan, butun bir gorunum olur.
+ */
 
 /* Global */
 * {
@@ -40,7 +35,7 @@ window#waybar {
 
 tooltip {
     background: @base;
-    border: 1px solid @surface1;
+    border: 1px solid alpha(@accent, 0.4);
     border-radius: 10px;
     color: @text;
 }
@@ -62,31 +57,32 @@ tooltip {
 #clock,
 #battery,
 #pulseaudio,
-#custom-system-popup,
 #language,
 #tray,
-#custom-notification {
+#custom-updates,
+#custom-control-center {
     padding: 0 10px;
     margin: 4px 2px;
     border-radius: 10px;
     background: transparent;
+    color: @text;
     transition: all 0.2s ease;
 }
 
-/* Hover glow */
+/* Hover: hepsi ayni, accent tonu */
 #clock:hover,
 #battery:hover,
 #pulseaudio:hover,
 #language:hover,
-#custom-system-popup:hover,
-#custom-notification:hover,
-#tray:hover {
-    background: alpha(@surface0, 0.5);
+#tray:hover,
+#custom-updates:hover,
+#custom-control-center:hover {
+    background: alpha(@accent, 0.15);
 }
 
 /* Window title */
 #window {
-    color: @subtext1;
+    color: @subtext0;
     font-style: italic;
 }
 
@@ -114,38 +110,58 @@ tooltip {
     border-bottom: 2px solid @accent;
 }
 
-/* Clock & Date */
+/* Clock */
 #clock {
-    color: @lavender;
     font-weight: bold;
-}
-
-/* Language */
-#language {
-    color: @peach;
-    font-weight: bold;
-}
-
-/* System popup button */
-#custom-system-popup {
-    color: @accent;
-}
-
-#custom-system-popup:hover {
-    background: alpha(@accent, 0.15);
 }
 
 /* Pulseaudio */
-#pulseaudio {
-    color: @pink;
-}
-
 #pulseaudio.muted {
     color: @overlay0;
 }
 
-#pulseaudio:hover {
-    background: alpha(@pink, 0.15);
+/* Battery: sadece durumda renk */
+#battery.charging,
+#battery.plugged {
+    color: @accent;
+}
+
+#battery.warning:not(.charging) {
+    color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    to {
+        color: @surface0;
+    }
+}
+
+/* Updates: bossa modul gizlenir (text ""), riskli paket varsa uyari rengi */
+#custom-updates.risky {
+    color: @peach;
+    background: alpha(@peach, 0.12);
+}
+
+/* Kontrol merkezi: okunmamis bildirim accent, rahatsiz etme soluk */
+#custom-control-center {
+    font-size: 15px;
+}
+
+#custom-control-center.notification,
+#custom-control-center.inhibited-notification {
+    color: @accent;
+}
+
+#custom-control-center.dnd-none,
+#custom-control-center.dnd-notification,
+#custom-control-center.dnd-inhibited-none,
+#custom-control-center.dnd-inhibited-notification {
+    color: @overlay0;
 }
 
 /* MPRIS / Media */
@@ -173,60 +189,14 @@ tooltip {
 
 #custom-media-prev:hover,
 #custom-media-next:hover {
-    color: @pink;
-}
-
-/* Updates */
-#custom-updates {
-    color: @peach;
-    padding: 0 12px;
-    margin: 4px 2px;
-    border-radius: 10px;
-    background: transparent;
-}
-
-#custom-updates.updated {
-    color: @overlay0;
-}
-
-/* Battery */
-#battery {
-    color: @accent;
-}
-
-#battery.warning {
-    color: @yellow;
-}
-
-#battery.critical {
-    color: @red;
-    animation: blink 1s linear infinite;
-}
-
-@keyframes blink {
-    to {
-        color: @surface0;
-    }
-}
-
-/* Tray */
-#tray {
     color: @text;
 }
 
+/* Tray */
 #tray > .passive {
     -gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-}
-
-/* Notification */
-#custom-notification {
-    color: @yellow;
-}
-
-#custom-notification:hover {
-    background: alpha(@yellow, 0.15);
 }

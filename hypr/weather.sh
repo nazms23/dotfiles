@@ -1,7 +1,7 @@
 #!/bin/bash
-# Hava durumu — wttr.in API
+# Hava durumu (wttr.in) — hyprlock kilit ekraninda gosterilir
 
-CACHE_FILE="/tmp/eww-weather-cache"
+CACHE_FILE="${XDG_RUNTIME_DIR:-/tmp}/weather-cache"
 CACHE_TTL=1800  # 30 dakika
 
 if [ -f "$CACHE_FILE" ] && [ $(($(date +%s) - $(stat -c %Y "$CACHE_FILE"))) -lt $CACHE_TTL ]; then
@@ -9,7 +9,7 @@ if [ -f "$CACHE_FILE" ] && [ $(($(date +%s) - $(stat -c %Y "$CACHE_FILE"))) -lt 
     exit 0
 fi
 
-data=$(curl -sf "wttr.in/Kastamonu+Merkez?format=%c|%t|%l" 2>/dev/null)
+data=$(curl -sf --max-time 5 "wttr.in/Kastamonu+Merkez?format=%c|%t|%l" 2>/dev/null)
 
 if [ -n "$data" ]; then
     icon=$(echo "$data" | cut -d'|' -f1 | xargs)

@@ -16,13 +16,13 @@
         "custom/media-next"
     ],
     "modules-right": [
+        "custom/updates",
         "tray",
         "battery",
         "pulseaudio",
         "hyprland/language",
         "clock",
-        "custom/system-popup",
-        "custom/notification"
+        "custom/control-center"
     ],
     "hyprland/window": {
         "format": "{}",
@@ -47,10 +47,25 @@
         "on-click-middle": "close"
     },
     "clock": {
-        "format": "󰃭 {:%d %B %Y   %H:%M}",
+        "format": "󰃭 {:L%d %B   %H:%M}",
+        "format-alt": "󰃭 {:L%A, %d %B %Y   %H:%M}",
         "locale": "tr_TR.UTF-8",
-        "tooltip": false,
-        "on-click": "~/.config/eww/scripts/popup-toggle.sh calendar-popup system-popup"
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "weeks-pos": "",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#cdd6f4'><b>{}</b></span>",
+                "weekdays": "<span color='#9399b2'><b>{}</b></span>",
+                "days": "<span color='#bac2de'>{}</span>",
+                "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
     },
     "hyprland/language": {
         "format": "󰌌 {}",
@@ -58,10 +73,12 @@
         "format-tr": "TR",
         "on-click": "hyprctl switchxkblayout all next"
     },
-    "custom/system-popup": {
-        "format": "󰒓",
-        "tooltip": false,
-        "on-click": "~/.config/eww/scripts/popup-toggle.sh system-popup calendar-popup"
+    "custom/updates": {
+        "exec": "~/.config/hypr/check-updates.sh",
+        "return-type": "json",
+        "interval": 1800,
+        "signal": 8,
+        "on-click": "kitty --class update-term -e bash -c 'yay -Syu; echo; read -rp \"Kapatmak için Enter...\"; pkill -RTMIN+8 waybar'"
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",
@@ -99,18 +116,20 @@
         "icon-size": 16,
         "spacing": 8
     },
-    "custom/notification": {
+    // Kontrol merkezi (swaync): bildirimler + WiFi/BT/gece isigi/oyun modu + ses/parlaklik + medya.
+    // Bos: disli, okunmamis bildirim: zil, rahatsiz etme: sessiz zil.
+    "custom/control-center": {
         "tooltip": false,
         "format": "{icon}",
         "format-icons": {
             "notification": "󰂚",
-            "none": "󰂜",
+            "none": "󰒓",
             "dnd-notification": "󰂛",
-            "dnd-none": "󰪑",
+            "dnd-none": "󰂛",
             "inhibited-notification": "󰂚",
-            "inhibited-none": "󰂜",
+            "inhibited-none": "󰒓",
             "dnd-inhibited-notification": "󰂛",
-            "dnd-inhibited-none": "󰪑"
+            "dnd-inhibited-none": "󰂛"
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
@@ -138,7 +157,7 @@
     "custom/media-prev": {
         "format": "⏮",
         "on-click": "playerctl previous",
-        "tooltip-format": "Onceki"
+        "tooltip-format": "Önceki"
     },
     "custom/media-next": {
         "format": "⏭",

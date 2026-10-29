@@ -24,18 +24,98 @@
     "hide-on-action": true,
     "script-fail-notify": true,
     "widgets": [
+        "buttons-grid",
+        "volume",
+        "backlight",
+        "mpris",
         "title",
         "dnd",
         "notifications"
     ],
     "widget-config": {
+        "buttons-grid": {
+            "buttons-per-row": 4,
+            "actions": [
+                {
+                    "label": "󰤨\nWiFi",
+                    "type": "toggle",
+                    "command": "$HOME/.config/hypr/cc-toggle.sh wifi set",
+                    "update-command": "$HOME/.config/hypr/cc-toggle.sh wifi status"
+                },
+                {
+                    "label": "󰂯\nBluetooth",
+                    "type": "toggle",
+                    "command": "$HOME/.config/hypr/cc-toggle.sh bluetooth set",
+                    "update-command": "$HOME/.config/hypr/cc-toggle.sh bluetooth status"
+                },
+                {
+                    "label": "󰖔\nGece ışığı",
+                    "type": "toggle",
+                    "command": "$HOME/.config/hypr/cc-toggle.sh nightlight set",
+                    "update-command": "$HOME/.config/hypr/cc-toggle.sh nightlight status"
+                },
+                {
+                    "label": "󰊴\nOyun modu",
+                    "type": "toggle",
+                    "command": "$HOME/.config/hypr/cc-toggle.sh gamemode set",
+                    "update-command": "$HOME/.config/hypr/cc-toggle.sh gamemode status"
+                },
+                {
+                    "label": "󰀂\nAğlar",
+                    "command": "swaync-client -cp; networkmanager_dmenu"
+                },
+                {
+                    "label": "󰂱\nCihazlar",
+                    "command": "swaync-client -cp; blueman-manager"
+                },
+                {
+                    "label": "󰓃\nSes",
+                    "command": "swaync-client -cp; pavucontrol"
+                },
+                {
+                    "label": "󰍛\nSistem",
+                    "command": "swaync-client -cp; $HOME/.config/hypr/sysmonitor.sh"
+                },
+                {
+                    "label": "󰹑\nEkran",
+                    "command": "swaync-client -cp; sleep 0.3; $HOME/.config/hypr/screenshot.sh region"
+                },
+                {
+                    "label": "󰸉\nDuvar k.",
+                    "command": "swaync-client -cp; waypaper --backend awww --folder ~/Wallpapers"
+                },
+                {
+                    "label": "󰌾\nKilitle",
+                    "command": "swaync-client -cp; hyprlock"
+                },
+                {
+                    "label": "󰐥\nGüç",
+                    "command": "swaync-client -cp; wlogout -b 5 -T 400 -B 400 --protocol layer-shell"
+                }
+            ]
+        },
+        "volume": {
+            "label": "󰕾",
+            "show-per-app": true,
+            "show-per-app-icon": true,
+            "show-per-app-label": false,
+            "empty-list-label": "Ses çalan uygulama yok"
+        },
+        "backlight": {
+            "label": "󰃟",
+            "device": "intel_backlight"
+        },
+        "mpris": {
+            "show-album-art": "when-available",
+            "autohide": true
+        },
         "title": {
             "text": "Bildirimler",
             "clear-all-button": true,
             "button-text": "Temizle"
         },
         "dnd": {
-            "text": "Rahatsiz Etme"
+            "text": "Rahatsız Etme"
         }
     }
 }
