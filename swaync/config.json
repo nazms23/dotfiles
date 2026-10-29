@@ -107,7 +107,10 @@
         },
         "mpris": {
             "show-album-art": "when-available",
-            "autohide": true
+            "autohide": true,
+            "blacklist": [
+                "playerctld"
+            ]
         },
         "title": {
             "text": "Bildirimler",
