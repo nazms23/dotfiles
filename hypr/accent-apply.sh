@@ -77,7 +77,8 @@ mark2_background        $ACCENT
 EOF
 
 # Reload
-pkill -SIGUSR2 -x waybar
+# waybar: config'teki reload_style_on_change colors.css'i izleyip sadece CSS'i yeniler.
+# (SIGUSR2 tam reload waybar 0.15'te mpris modulunu cokertiyor, kullanma.)
 swaync-client --reload-css >/dev/null 2>&1
 pkill -SIGUSR1 -x kitty
 hyprctl reload >/dev/null 2>&1
