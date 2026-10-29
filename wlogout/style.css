@@ -1,3 +1,4 @@
+@import "colors.css"; /* accent + accent2: ~/.config/hypr/accent-apply.sh uretir */
 /* Catppuccin Mocha - Wlogout */
 
 @define-color base #1e1e2e;
@@ -53,9 +54,9 @@ button:focus {
     background-image: url("/home/sudouy/.config/wlogout/icons/lock.svg");
 }
 #lock:hover {
-    color: @green;
-    border-color: @green;
-    text-shadow: 0 0 8px alpha(@green, 0.5);
+    color: @accent;
+    border-color: @accent;
+    text-shadow: 0 0 8px alpha(@accent, 0.5);
 }
 
 /* Logout */

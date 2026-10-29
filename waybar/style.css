@@ -1,3 +1,4 @@
+@import "colors.css"; /* accent + accent2: ~/.config/hypr/accent-apply.sh uretir */
 /* Catppuccin Mocha Palette */
 @define-color base #1e1e2e;
 @define-color mantle #181825;
@@ -109,8 +110,8 @@ tooltip {
 }
 
 #taskbar button.active {
-    background: alpha(@green, 0.2);
-    border-bottom: 2px solid @green;
+    background: alpha(@accent, 0.2);
+    border-bottom: 2px solid @accent;
 }
 
 /* Clock & Date */
@@ -127,11 +128,11 @@ tooltip {
 
 /* System popup button */
 #custom-system-popup {
-    color: @green;
+    color: @accent;
 }
 
 #custom-system-popup:hover {
-    background: alpha(@green, 0.15);
+    background: alpha(@accent, 0.15);
 }
 
 /* Pulseaudio */
@@ -149,7 +150,7 @@ tooltip {
 
 /* MPRIS / Media */
 #mpris {
-    color: @green;
+    color: @accent;
     font-style: italic;
     padding: 0 12px;
     margin: 4px 2px;
@@ -163,7 +164,7 @@ tooltip {
 
 #custom-media-prev,
 #custom-media-next {
-    color: @green;
+    color: @accent;
     font-size: 15px;
     padding: 0 6px;
     margin: 4px 0px;
@@ -190,7 +191,7 @@ tooltip {
 
 /* Battery */
 #battery {
-    color: @green;
+    color: @accent;
 }
 
 #battery.warning {

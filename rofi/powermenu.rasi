@@ -4,12 +4,10 @@
     bg-hover:        rgba ( 69, 71, 90, 60 % );
     fg:              rgba ( 205, 214, 244, 100 % );
     fg-dim:          rgba ( 166, 173, 200, 100 % );
-    accent:          rgba ( 166, 227, 161, 100 % );
     red:             rgba ( 243, 139, 168, 100 % );
     green:           rgba ( 166, 227, 161, 100 % );
     yellow:          rgba ( 249, 226, 175, 100 % );
     blue:            rgba ( 137, 180, 250, 100 % );
-    border-clr:      rgba ( 166, 227, 161, 40 % );
     background-color: transparent;
 }
 
@@ -66,3 +64,6 @@ element-text {
     text-color:       inherit;
     font:             "JetBrainsMono Nerd Font 12";
 }
+
+/* accent, border-clr, selected-bg: ~/.config/hypr/accent-apply.sh uretir */
+@import "colors.rasi"

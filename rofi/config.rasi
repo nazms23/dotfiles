@@ -15,9 +15,6 @@ configuration {
     bg-hover:        rgba ( 69, 71, 90, 50 % );
     fg:              rgba ( 205, 214, 244, 100 % );
     fg-dim:          rgba ( 166, 173, 200, 100 % );
-    accent:          rgba ( 166, 227, 161, 100 % );
-    border-clr:      rgba ( 166, 227, 161, 30 % );
-    selected-bg:     rgba ( 166, 227, 161, 18 % );
     background-color: transparent;
 }
 
@@ -92,3 +89,6 @@ element-text {
     vertical-align: 0.5;
     font: "JetBrainsMono Nerd Font 11";
 }
+
+/* accent, border-clr, selected-bg: ~/.config/hypr/accent-apply.sh uretir */
+@import "colors.rasi"

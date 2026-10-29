@@ -85,6 +85,9 @@ ln -sf "$DOTFILES/bashrc" ~/.bashrc
 # Mimeapps
 ln -sf "$DOTFILES/mimeapps.list" ~/.config/mimeapps.list
 
+# Accent renk dosyalari (waybar/rofi/kitty/... import eder; git disi, ilk kurulumda varsayilan yesil)
+~/.config/hypr/accent-apply.sh "#a6e3a1" "#94e2d5" 2>/dev/null
+
 echo ""
 echo "=== Sistem config'leri (sudo gerekli) ==="
 echo "SDDM temasi icin:"

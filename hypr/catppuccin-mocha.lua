@@ -1,5 +1,5 @@
 -- Catppuccin Mocha Color Palette for Hyprland
--- update-accent.sh / reset-accent.sh green ve teal satirlarini sed ile degistirir
+-- Statik palet. Dinamik accent ayri: accent.lua (accent-apply.sh uretir)
 return {
     rosewater = "rgb(f5e0dc)",
     flamingo  = "rgb(f2cdcd)",

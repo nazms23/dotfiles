@@ -7,6 +7,12 @@
 
 local c = require("catppuccin-mocha")
 
+-- Dinamik accent (wallpaper'dan): accent-apply.sh uretir. Yoksa Catppuccin green/teal.
+local ok, acc = pcall(require, "accent")
+if not ok or type(acc) ~= "table" then
+    acc = { accent = c.green, accent2 = c.teal }
+end
+
 
 ----------------
 --- MONITORS ---
@@ -81,7 +87,7 @@ hl.config({
         border_size = 2,
 
         col = {
-            active_border   = { colors = { c.green, c.teal }, angle = 45 },
+            active_border   = { colors = { acc.accent, acc.accent2 }, angle = 45 },
             inactive_border = c.surface0,
         },
 

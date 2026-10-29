@@ -1,11 +1,13 @@
 #!/bin/bash
 
+source ~/.config/hypr/accent.env 2>/dev/null; ACCENT=${ACCENT:-#a6e3a1}
+
 CSS_FILE="/tmp/hypr-help-gtk.css"
-cat > "$CSS_FILE" << 'CSSEOF'
+cat > "$CSS_FILE" << CSSEOF
 * { font-family: "JetBrainsMono Nerd Font", monospace; }
 window { background-color: #1e1e2e; border-radius: 16px; }
 .dialog-text { color: #cdd6f4; font-size: 13px; }
-button { background-color: #313244; color: #a5d396; border: 1px solid #45475a; border-radius: 8px; padding: 8px 20px; font-weight: bold; }
+button { background-color: #313244; color: $ACCENT; border: 1px solid #45475a; border-radius: 8px; padding: 8px 20px; font-weight: bold; }
 button:hover { background-color: #45475a; }
 CSSEOF
 
@@ -13,7 +15,7 @@ S='<span foreground="#585b70">━━━━━━━━━━━━━━━━�
 K='foreground="#89b4fa"'
 V='foreground="#cdd6f4"'
 H='foreground="#94e2d5" weight="bold" size="large"'
-A='foreground="#a5d396"'
+A="foreground=\"$ACCENT\""
 
 PAGE1="<span font=\"16\" $A weight=\"bold\">SAYFA 1/5 — Genel ve Pencere</span>
 

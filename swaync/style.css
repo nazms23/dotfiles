@@ -1,3 +1,4 @@
+@import "colors.css"; /* accent + accent2: ~/.config/hypr/accent-apply.sh uretir */
 /* Catppuccin Mocha */
 @define-color base #1e1e2e;
 @define-color mantle #181825;
@@ -48,7 +49,7 @@
 
 .notification:hover {
     background: alpha(@surface0, 0.9);
-    border-color: alpha(@green, 0.3);
+    border-color: alpha(@accent, 0.3);
 }
 
 .notification .summary {
@@ -101,12 +102,12 @@
 }
 
 .floating-notifications .notification:hover {
-    border-color: alpha(@green, 0.4);
+    border-color: alpha(@accent, 0.4);
 }
 
 /* ── Title Widget ── */
 .widget-title {
-    color: @green;
+    color: @accent;
     font-weight: bold;
     font-size: 15px;
     margin: 6px 8px 2px 8px;
@@ -123,9 +124,9 @@
 }
 
 .widget-title button:hover {
-    background: @green;
+    background: @accent;
     color: @base;
-    border-color: @green;
+    border-color: @accent;
 }
 
 /* ── DND Toggle ── */
@@ -145,7 +146,7 @@
 }
 
 .widget-dnd > switch:checked {
-    background: @green;
+    background: @accent;
 }
 
 .widget-dnd > switch slider {
