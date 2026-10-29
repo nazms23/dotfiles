@@ -26,7 +26,8 @@ sudo pacman -S --needed \
     earlyoom \
     nwg-look \
     pacman-contrib hyprsunset satty hyprshutdown tree-sitter-cli papirus-icon-theme \
-    python-gobject gtk4 libadwaita gtk4-layer-shell
+    python-gobject gtk4 libadwaita gtk4-layer-shell \
+    gvfs
 
 echo ""
 echo "=== AUR paketleri kuruluyor (yay) ==="
