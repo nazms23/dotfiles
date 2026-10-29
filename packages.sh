@@ -24,16 +24,16 @@ sudo pacman -S --needed \
     github-cli \
     alsa-utils \
     earlyoom \
-    nwg-look
+    nwg-look \
+    pacman-contrib hyprsunset satty hyprshutdown tree-sitter-cli papirus-icon-theme
 
 echo ""
 echo "=== AUR paketleri kuruluyor (yay) ==="
 yay -S --needed \
     rofi-wayland \
-    hyprswitch \
+    matugen-bin \
     waypaper \
     kando-bin \
-    eww-git \
     rofi-calc \
     catppuccin-cursors-mocha \
     kvantum-theme-catppuccin-git \
@@ -46,11 +46,8 @@ yay -S --needed \
     spicetify-bin
 
 echo ""
-echo "=== Hyprexpo plugin kur ==="
-hyprpm update
-hyprpm add https://github.com/hyprwm/hyprland-plugins
-hyprpm enable hyprexpo
-hyprpm reload
+echo "=== hyprswitch (yerel yamali PKGBUILD, Hyprland 0.57 uyumu) ==="
+(cd "$(dirname "$(readlink -f "$0")")/pkgbuilds/hyprswitch" && makepkg -si --needed --noconfirm)
 
 echo ""
 echo "=== earlyoom config (RAM tukenince donma yerine sizan process'i oldur) ==="

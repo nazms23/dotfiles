@@ -5,7 +5,7 @@
 DOTFILES="$HOME/dotfiles"
 
 echo "=== Dizinler olusturuluyor ==="
-mkdir -p ~/.config/{hypr,waybar,rofi,kitty,swaync,fastfetch,Kvantum,networkmanager-dmenu,kando,waypaper,eww/scripts,wlogout,btop/themes,nvim/lua/{config,plugins}}
+mkdir -p ~/.config/{hypr,waybar,rofi,kitty,swaync,fastfetch,Kvantum,networkmanager-dmenu,kando,waypaper,wlogout,btop/themes,nvim/lua/{config,plugins}}
 mkdir -p ~/.local/share/applications
 
 echo "=== Symlink'ler olusturuluyor ==="
@@ -49,13 +49,6 @@ ln -sf "$DOTFILES/kando/menus.json" ~/.config/kando/menus.json
 # Waypaper
 ln -sf "$DOTFILES/waypaper/config.ini" ~/.config/waypaper/config.ini
 
-# EWW
-ln -sf "$DOTFILES/eww/eww.yuck" ~/.config/eww/eww.yuck
-ln -sf "$DOTFILES/eww/eww.scss" ~/.config/eww/eww.scss
-for f in "$DOTFILES"/eww/scripts/*; do
-    ln -sf "$f" ~/.config/eww/scripts/$(basename "$f")
-done
-
 # Wlogout
 for f in "$DOTFILES"/wlogout/*; do
     ln -sf "$f" ~/.config/wlogout/$(basename "$f")
@@ -78,6 +71,9 @@ done
 
 # Steam (NVIDIA Prime)
 ln -sf "$DOTFILES/applications/steam.desktop" ~/.local/share/applications/steam.desktop
+
+# Spotify (acilista spicetify temasi silinmisse otomatik yeniden uygular)
+ln -sf "$DOTFILES/applications/spotify-launcher.desktop" ~/.local/share/applications/spotify-launcher.desktop
 
 # Bashrc
 ln -sf "$DOTFILES/bashrc" ~/.bashrc

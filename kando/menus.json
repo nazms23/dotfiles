@@ -132,7 +132,7 @@
                   "actions": [
                     {
                       "type": "execute-command",
-                      "command": "spotify-launcher",
+                      "command": "~/.config/hypr/spotify.sh",
                       "detached": true,
                       "isolated": false
                     },

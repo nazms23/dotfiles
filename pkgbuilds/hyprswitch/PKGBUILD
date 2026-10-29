@@ -1,0 +1,59 @@
+# Yerel yamali surum: Hyprland 0.57 uyumu (2 yama, prepare() icinde aciklamali).
+# Upstream duzeltince silinip AUR surumune donulebilir. Kurulum: packages.sh
+
+# Maintainer: Elia Nitsche <nitscheelia at gmail dot com>
+# Contributor: H3rmt
+
+# This is a fork of the original hyprswitch as it got renamed to hyprshell!
+
+pkgname=hyprswitch
+pkgver=5.0.0
+pkgrel=1
+pkgdesc="A CLI/GUI that allows switching between windows in Hyprland"
+arch=('any')
+url="https://github.com/egnrse/hyprswitch/"
+license=("MIT")
+makedepends=('cargo')
+depends=('hyprland' 'gtk4-layer-shell' 'gtk4')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/egnrse/hyprswitch/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('f47916c755ccf11920b281c2fa643ffce71757674e2bb78ba0a4adb06efed3d8')
+
+prepare() {
+    export RUSTUP_TOOLCHAIN=stable
+    cd "$pkgname-$pkgver"
+    cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+
+    # Yerel yama: Hyprland 0.57'de special workspace yokken monitors -j
+    # specialWorkspace'ta "id" alani gelmiyor; hyprland-rs bunu zorunlu bekliyor
+    # ("missing field `id`" ile Alt-Tab hic acilmiyor). id'ye serde default ekle.
+    local _crate
+    _crate=$(find "${CARGO_HOME:-$HOME/.cargo}/registry/src" -maxdepth 2 -type d -name 'hyprland-0.4.0-beta.3' | head -1)
+    rm -rf "$srcdir/hyprland-rs"
+    cp -r "$_crate" "$srcdir/hyprland-rs"
+    sed -i '/pub struct WorkspaceBasic {/,/^}/ s|^\(\s*\)pub id: WorkspaceId,|\1#[serde(default)]\n\1pub id: WorkspaceId,|' \
+        "$srcdir/hyprland-rs/src/data/regular.rs"
+    grep -q '#\[serde(default)\]' "$srcdir/hyprland-rs/src/data/regular.rs"
+    printf '\n[patch.crates-io]\nhyprland = { path = "../hyprland-rs" }\n' >> Cargo.toml
+
+    # Yerel yama 2: --reverse-key=mod=... submap bind'ini "ALT shift_l + TAB" diye
+    # uretiyor, Hyprland Lua "Unknown key" ile reddediyor. "ALT + SHIFT + TAB" yap.
+    sed -i -e 's/format!("{} {}", main_mod, modkey)/format!("{} + {}", main_mod, get_mod_from_mod_key(modkey))/g' \
+        -e 's/&modkey.to_string(),/get_mod_from_mod_key(modkey),/' src/daemon/submap.rs
+    [ "$(grep -c 'get_mod_from_mod_key(modkey)' src/daemon/submap.rs)" -eq 4 ]
+    cargo fetch --target "$(rustc -vV | sed -n 's/host: //p')"
+}
+
+build() {
+    export RUSTUP_TOOLCHAIN=stable
+    export CARGO_TARGET_DIR=target
+    cd "$pkgname-$pkgver"
+    cargo build --frozen --release
+}
+
+package() {
+    install -Dm0755 -t "$pkgdir/usr/bin/" "$pkgname-$pkgver/target/release/$pkgname"
+}
+
+post_install() {
+    echo "Please restart the hyprswitch daemon"
+}
