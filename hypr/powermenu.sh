@@ -7,7 +7,7 @@ chosen=$(echo -e "$options" | rofi -dmenu -p "Guc Menusu" -i -theme ~/.config/ro
 case "$chosen" in
     Kilitle)            hyprlock ;;
     Uyku)               systemctl suspend ;;
-    "Oturumu Kapat")    hyprctl dispatch exit ;;
+    "Oturumu Kapat")    hyprctl dispatch 'hl.dsp.exit()' ;;
     "Yeniden Baslat")   systemctl reboot ;;
     Kapat)              systemctl poweroff ;;
 esac
