@@ -1,4 +1,4 @@
--- Hyprland Lua config (0.55+). Eski hyprland.conf'tan cevrildi.
+-- Hyprland Lua config (0.55+, 0.57'de hyprlang kaldirildi).
 -- Wiki: https://wiki.hypr.land/Configuring/Start/
 
 -------------------
@@ -62,6 +62,8 @@ hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 
 -- Electron Wayland
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
+-- Kando 3.x AUR baslaticisi varsayilan x11 (XWayland) aciyor, native Wayland'e zorla
+hl.env("KANDO_OZONE_PLATFORM", "wayland")
 
 -- GTK Catppuccin tema
 hl.env("GTK_THEME", "catppuccin-mocha-green-standard+default")
@@ -236,8 +238,8 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd('cliphist list | rofi -dmenu -p "Clip
 -- Notification center
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
 
--- Kando pie menu (global dispatcher + menu.kando.Kando app id)
-hl.bind(mainMod .. " + D", hl.dsp.global("menu.kando.Kando:example-menu"))
+-- Kando pie menu (3.x: global shortcut app id "kando", pencere class'i hala menu.kando.Kando)
+hl.bind(mainMod .. " + D", hl.dsp.global("kando:example-menu"))
 
 -- WiFi manager
 hl.bind(mainMod .. " + F11", hl.dsp.exec_cmd("networkmanager_dmenu"))
@@ -376,7 +378,7 @@ hl.window_rule({
     move  = { "monitor_w*0.68", "monitor_h*0.67" },
 })
 
--- Kando pie menu (Electron 41 / native Wayland - class: menu.kando.Kando)
+-- Kando pie menu (3.x, Electron 43 / native Wayland - class: menu.kando.Kando)
 hl.window_rule({
     name     = "kando-menu",
     match    = { class = "^(menu\\.kando\\.Kando)$", title = "^(Kando Menu)$" },
