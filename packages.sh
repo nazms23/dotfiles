@@ -25,7 +25,8 @@ sudo pacman -S --needed \
     alsa-utils \
     earlyoom \
     nwg-look \
-    pacman-contrib hyprsunset satty hyprshutdown tree-sitter-cli papirus-icon-theme
+    pacman-contrib hyprsunset satty hyprshutdown tree-sitter-cli papirus-icon-theme \
+    python-gobject gtk4 libadwaita
 
 echo ""
 echo "=== AUR paketleri kuruluyor (yay) ==="

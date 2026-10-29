@@ -47,6 +47,17 @@ for f in "$CFG/waybar/colors.css" "$CFG/swaync/colors.css" "$CFG/wlogout/colors.
 EOF
 done
 
+# Yuva uygulamalari (GTK4/libadwaita CSS degiskenleri; acik uygulamalar dosyayi izleyip canli gunceller)
+mkdir -p "$CFG/yuva"
+cat > "$CFG/yuva/colors.css" <<EOF
+:root {
+    --accent-bg-color: $ACCENT;
+    --accent-color: $ACCENT;
+    --accent-fg-color: #1e1e2e;
+    --yuva-accent2: $ACCENT2;
+}
+EOF
+
 # Rofi v2 (rgba ( R, G, B, % ) formati)
 cat > "$CFG/rofi/colors.rasi" <<EOF
 * {

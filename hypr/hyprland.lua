@@ -285,6 +285,7 @@ bind(mainMod .. " + D", hl.dsp.global("kando:example-menu"), "Genel: Kando pie m
 bind(mainMod .. " + W", hl.dsp.exec_cmd("waypaper --backend awww --folder ~/Wallpapers"), "Genel: Duvar kağıdı seç (accent otomatik)")
 bind(mainMod .. " + H", hl.dsp.exec_cmd("~/.config/hypr/keybinds-help.sh"), "Genel: Bu yardım ekranı")
 bind(mainMod .. " + F1", hl.dsp.exec_cmd("~/.config/hypr/gamemode.sh toggle"), "Genel: Oyun modu (blur/animasyon/gölge kapat-aç)")
+bind("XF86Calculator", hl.dsp.exec_cmd("~/.local/bin/yuva-hesap"), "Genel: [Hesap makinesi tuşu] Yuva Hesap")
 
 -- Pencere
 bind(mainMod .. " + C", hl.dsp.window.close(), "Pencere: Kapat")
@@ -437,6 +438,15 @@ hl.window_rule({
     match  = { class = "^(org.pulseaudio.pavucontrol)$" },
     float  = true,
     size   = { "monitor_w*0.4", "monitor_h*0.5" },
+    center = true,
+})
+
+-- Yuva Hesap: kucuk yuzen pencere
+hl.window_rule({
+    name   = "yuva-hesap-float",
+    match  = { class = "^(tr\\.yuva\\.Hesap)$" },
+    float  = true,
+    size   = { 380, 600 },
     center = true,
 })
 
