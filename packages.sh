@@ -42,11 +42,8 @@ yay -S --needed \
     swayosd-git \
     catppuccin-gtk-theme-mocha \
     wlogout \
-    libratbag piper
-
-echo ""
-echo "=== Spicetify kuruluyor ==="
-curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
+    libratbag piper \
+    spicetify-bin
 
 echo ""
 echo "=== Hyprexpo plugin kur ==="

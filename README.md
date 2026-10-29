@@ -45,15 +45,11 @@ sudo pacman -S --needed \
 yay -S --needed \
     rofi-wayland hyprswitch waypaper kando-bin \
     catppuccin-cursors-mocha kvantum-theme-catppuccin-git \
-    networkmanager-dmenu-git auto-cpufreq
+    networkmanager-dmenu-git auto-cpufreq \
+    spicetify-bin
 ```
 
-### Diger
-
-```bash
-# Spicetify (Spotify tema motoru)
-curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh
-```
+> Spotify her guncellendiginde: `spicetify backup apply` (eski yedek baska surumdense `restore` KULLANMA).
 
 ## Kurulum
 

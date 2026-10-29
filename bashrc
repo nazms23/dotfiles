@@ -12,4 +12,3 @@ PS1='[\u@\h \W]\$ '
 # Fastfetch
 fastfetch
 
-export PATH=$PATH:/home/sudouy/.spicetify
