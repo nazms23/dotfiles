@@ -12,8 +12,13 @@ return {
       "yaml", "toml", "regex",
     }
 
-    -- Auto-install parsers
-    local installed = vim.tbl_map(function(p) return p end, vim.api.nvim_get_runtime_file("parser/*.so", true))
+    -- Eksik parser'lari arka planda kur (main dali: tree-sitter-cli paketi gerekli)
+    local missing = vim.tbl_filter(function(lang)
+      return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".so", false) == 0
+    end, ensure)
+    if #missing > 0 and vim.fn.executable("tree-sitter") == 1 then
+      require("nvim-treesitter").install(missing)
+    end
     for _, lang in ipairs(ensure) do
       pcall(vim.treesitter.language.add, lang)
     end
