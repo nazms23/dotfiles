@@ -45,9 +45,9 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
     hl.exec_cmd("sleep 3 && kando")
-    hl.exec_cmd("sleep 4 && eww daemon")
     hl.exec_cmd("swayosd-server")
     hl.exec_cmd("sleep 2 && ~/.config/hypr/update-accent.sh")
+    hl.exec_cmd("~/.config/hypr/power-watch.sh")
 end)
 
 
@@ -176,8 +176,60 @@ hl.animation({ leaf = "workspacesIn",  enabled = true, speed = 5,    bezier = "o
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 5,    bezier = "overshot",     style = "slide" })
 
 
--- NOT: hyprexpo plugin'i Hyprland 0.55'te resmi depodan kaldirildi (bakimsiz).
--- Workspace overview artik hyprswitch ile yapiliyor (SUPER+A) - plugin gerektirmez.
+------------------------------------
+--- PIL / OYUN MODU (dinamik)    ---
+------------------------------------
+
+-- Sarj adaptoru (/sys/class/power_supply/*: type=Mains). Bulunamazsa prizde varsay.
+local function read_line(path)
+    local f = io.open(path, "r")
+    if not f then return nil end
+    local v = f:read("*l")
+    f:close()
+    return v
+end
+
+local function on_ac()
+    local p = io.popen("ls /sys/class/power_supply 2>/dev/null")
+    if p then
+        for dev in p:lines() do
+            local base = "/sys/class/power_supply/" .. dev
+            if read_line(base .. "/type") == "Mains" then
+                p:close()
+                return read_line(base .. "/online") == "1"
+            end
+        end
+        p:close()
+    end
+    return true
+end
+
+local ac_at_load = on_ac()
+
+-- Pilde: kenarlik donme animasyonu (loop, ekrani surekli 144 Hz yeniden cizdirir) kapali, blur hafif
+if not ac_at_load then
+    hl.animation({ leaf = "borderangle", enabled = false })
+    hl.config({ decoration = { blur = { passes = 1 } } })
+end
+
+-- Sarj durumu degisince reload: power-watch.sh (udev olayi). hl.timer'i config yuklenirken
+-- olusturmak --verify-config'i cokertiyor (0.57), o yuzden izleme disarida.
+
+-- Oyun modu: gamemode.sh durum dosyasini olusturur/siler ve reload eder (SUPER+F1)
+local gamemode_file = io.open(os.getenv("HOME") .. "/.cache/hypr-gamemode", "r")
+if gamemode_file then
+    gamemode_file:close()
+    hl.config({
+        animations = { enabled = false },
+        decoration = {
+            blur         = { enabled = false },
+            shadow       = { enabled = false },
+            dim_inactive = false,
+            inactive_opacity = 1.0,
+        },
+        general = { gaps_in = 0, gaps_out = 0 },
+    })
+end
 
 
 -------------
@@ -215,108 +267,92 @@ hl.device({
 
 local mainMod = "SUPER"
 
--- Core
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + C", hl.dsp.window.close())
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("wlogout -b 5 -T 400 -B 400 --protocol layer-shell"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-hl.bind(mainMod .. " + T", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
-
--- Keybindings help
-hl.bind(mainMod .. " + H", hl.dsp.exec_cmd("~/.config/hypr/keybinds-help.sh"))
-
--- Wallpaper picker
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("waypaper --backend awww --folder ~/Wallpapers"))
-
--- Alt-Tab style window switcher (hyprswitch 5.x: modifier'lar BUYUK harf)
-hl.bind("ALT + TAB", hl.dsp.exec_cmd("hyprswitch gui --mod-key ALT --key TAB --close mod-key-release --reverse-key=mod=SHIFT --sort-recent true"))
-
--- Lock screen
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
-
--- Clipboard manager
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd('cliphist list | rofi -dmenu -p "Clipboard" | cliphist decode | wl-copy'))
-
--- Notification center
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
-
--- Kando pie menu (3.x: global shortcut app id "kando", pencere class'i hala menu.kando.Kando)
-hl.bind(mainMod .. " + D", hl.dsp.global("kando:example-menu"))
-
--- WiFi manager
-hl.bind(mainMod .. " + F11", hl.dsp.exec_cmd("networkmanager_dmenu"))
-
--- EWW masaustu widget toggle
-hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("eww open --toggle desktop-widget"))
-
--- SUPER+A bos - hyprexpo 0.55'te kaldirildi, workspace overview yok
-
--- Screenshots
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
-hl.bind("Print", hl.dsp.exec_cmd("grim ~/Screenshots/$(date +%Y%m%d_%H%M%S).png"))
-
--- OCR - ekrandan metin tanima (alan secip panoya kopyalar)
-hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd("~/.config/hypr/ocr.sh auto"))
-hl.bind(mainMod .. " + SHIFT + J", hl.dsp.exec_cmd("~/.config/hypr/ocr.sh jpn"))
-hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("~/.config/hypr/ocr.sh menu"))
-
--- Move focus
-hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
-
--- Switch workspaces / move to workspace (0 = workspace 10)
-for i = 1, 10 do
-    local key = i % 10
-    hl.bind(mainMod .. " + " .. key,         hl.dsp.focus({ workspace = i }))
-    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+-- Bind yardimcisi. Aciklama formati "Kategori: Ne yapar" -> SUPER+H yardim ekrani
+-- (keybinds-help.sh) bunu hyprctl binds'tan okuyup gruplar. "[...]" ile tus gosterimi
+-- ozellestirilebilir (ornegin 4 yon tusunu tek satirda gostermek icin).
+-- Aciklamasi olmayan bind yardimda gorunmez.
+local function bind(keys, dsp, desc, opts)
+    opts = opts or {}
+    if desc then opts.description = desc end
+    return hl.bind(keys, dsp, opts)
 end
 
--- Sıradaki/önceki workspace
-hl.bind(mainMod .. " + Tab",         hl.dsp.focus({ workspace = "+1" }))
-hl.bind(mainMod .. " + SHIFT + Tab", hl.dsp.focus({ workspace = "-1" }))
+-- Genel
+bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal),    "Genel: Terminal (kitty)")
+bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager), "Genel: Dosya yöneticisi (Dolphin)")
+bind(mainMod .. " + R", hl.dsp.exec_cmd(menu),        "Genel: Uygulama başlatıcı (rofi)")
+bind(mainMod .. " + D", hl.dsp.global("kando:example-menu"), "Genel: Kando pie menü")
+bind(mainMod .. " + W", hl.dsp.exec_cmd("waypaper --backend awww --folder ~/Wallpapers"), "Genel: Duvar kağıdı seç (accent otomatik)")
+bind(mainMod .. " + H", hl.dsp.exec_cmd("~/.config/hypr/keybinds-help.sh"), "Genel: Bu yardım ekranı")
+bind(mainMod .. " + F1", hl.dsp.exec_cmd("~/.config/hypr/gamemode.sh toggle"), "Genel: Oyun modu (blur/animasyon/gölge kapat-aç)")
 
--- Mouse workspace scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+-- Pencere
+bind(mainMod .. " + C", hl.dsp.window.close(), "Pencere: Kapat")
+bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }), "Pencere: Tam ekran")
+bind(mainMod .. " + T", hl.dsp.window.float({ action = "toggle" }), "Pencere: Yüzen / döşeli")
+bind(mainMod .. " + P", hl.dsp.window.pseudo(), "Pencere: Pseudo (boyutu koru)")
+bind(mainMod .. " + J", hl.dsp.layout("togglesplit"), "Pencere: Bölmeyi çevir (yatay/dikey)")
+bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }),  "Pencere: [SUPER + ←↑↓→] Odağı taşı")
+bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
+bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+bind(mainMod .. " + CTRL + left",  hl.dsp.window.resize({ x = -40, y = 0,   relative = true }), "Pencere: [SUPER + CTRL + ←↑↓→] Boyutlandır", { repeating = true })
+bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({ x = 40,  y = 0,   relative = true }), nil, { repeating = true })
+bind(mainMod .. " + CTRL + up",    hl.dsp.window.resize({ x = 0,   y = -40, relative = true }), nil, { repeating = true })
+bind(mainMod .. " + CTRL + down",  hl.dsp.window.resize({ x = 0,   y = 40,  relative = true }), nil, { repeating = true })
+bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   "Pencere: [SUPER + Sol tık sürükle] Taşı",       { mouse = true })
+bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), "Pencere: [SUPER + Sağ tık sürükle] Boyutlandır", { mouse = true })
 
--- Move/resize with mouse
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+-- Pencere gecisi ve workspace'ler
+bind("ALT + TAB", hl.dsp.exec_cmd("hyprswitch gui --mod-key ALT --key TAB --close mod-key-release --reverse-key=mod=SHIFT --sort-recent true"),
+    "Workspace: [ALT + TAB] Pencere değiştir (SHIFT ile geri)")
+bind(mainMod .. " + A", hl.dsp.exec_cmd("hyprswitch gui --mod-key SUPER --key A --switch-type workspace --close default"),
+    "Workspace: Genel bakış (workspace seç, Enter/tık)")
+for i = 1, 10 do
+    local key = i % 10
+    bind(mainMod .. " + " .. key,         hl.dsp.focus({ workspace = i }),       i == 1 and "Workspace: [SUPER + 1…0] Workspace'e git" or nil)
+    bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }), i == 1 and "Workspace: [SUPER + SHIFT + 1…0] Pencereyi workspace'e taşı" or nil)
+end
+bind(mainMod .. " + Tab",         hl.dsp.focus({ workspace = "+1" }), "Workspace: Sonraki")
+bind(mainMod .. " + SHIFT + Tab", hl.dsp.focus({ workspace = "-1" }), "Workspace: Önceki")
+bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }), "Workspace: [SUPER + Tekerlek] Workspace'ler arası gez")
+bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 
--- Resize with keyboard
-hl.bind(mainMod .. " + CTRL + left",  hl.dsp.window.resize({ x = -40, y = 0,   relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({ x = 40,  y = 0,   relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + up",    hl.dsp.window.resize({ x = 0,   y = -40, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + down",  hl.dsp.window.resize({ x = 0,   y = 40,  relative = true }), { repeating = true })
+-- Sistem
+bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"), "Sistem: Ekranı kilitle")
+bind(mainMod .. " + M", hl.dsp.exec_cmd("wlogout -b 5 -T 400 -B 400 --protocol layer-shell"), "Sistem: Güç menüsü (kapat/uyku/çıkış)")
+bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"), "Sistem: Kontrol merkezi (bildirim, WiFi, BT, gece ışığı)")
+bind(mainMod .. " + V", hl.dsp.exec_cmd('cliphist list | rofi -dmenu -p "Pano" | cliphist decode | wl-copy'), "Sistem: Pano geçmişi")
+bind(mainMod .. " + F11", hl.dsp.exec_cmd("networkmanager_dmenu"), "Sistem: WiFi ağları (rofi)")
 
--- Mouse emulation with keyboard (SUPER+ALT + hjkl = move, u = left click, y = right click)
-hl.bind(mainMod .. " + ALT + h", hl.dsp.exec_cmd("ydotool mousemove -x -8 -y 0"), { repeating = true })
-hl.bind(mainMod .. " + ALT + l", hl.dsp.exec_cmd("ydotool mousemove -x 8 -y 0"),  { repeating = true })
-hl.bind(mainMod .. " + ALT + k", hl.dsp.exec_cmd("ydotool mousemove -x 0 -y -8"), { repeating = true })
-hl.bind(mainMod .. " + ALT + j", hl.dsp.exec_cmd("ydotool mousemove -x 0 -y 8"),  { repeating = true })
-hl.bind(mainMod .. " + ALT + u", hl.dsp.exec_cmd("ydotool click 0xC0"))
-hl.bind(mainMod .. " + ALT + y", hl.dsp.exec_cmd("ydotool click 0xC1"))
+-- Ekran goruntusu ve OCR
+bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("~/.config/hypr/screenshot.sh region"), "Ekran: Alan seç → panoya (bildirimden Düzenle/Kaydet)")
+bind("Print", hl.dsp.exec_cmd("~/.config/hypr/screenshot.sh full"), "Ekran: Tüm ekran → ~/Screenshots")
+bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd("~/.config/hypr/ocr.sh auto"), "Ekran: OCR, alandaki metni kopyala (otomatik dil)")
+bind(mainMod .. " + SHIFT + J", hl.dsp.exec_cmd("~/.config/hypr/ocr.sh jpn"),  "Ekran: OCR (Japonca)")
+bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("~/.config/hypr/ocr.sh menu"), "Ekran: OCR dil seçici")
 
--- Media keys
-hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("swayosd-client --output-volume raise --max-volume 150"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("swayosd-client --output-volume lower"),                  { locked = true, repeating = true })
-hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"),            { locked = true })
-hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"),             { locked = true })
-hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("swayosd-client --brightness raise"),                     { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness lower"),                     { locked = true, repeating = true })
-hl.bind("Caps_Lock",             hl.dsp.exec_cmd("sleep 0.1 && ~/.config/hypr/lockkey-osd.sh caps"),       { locked = true })
-hl.bind("Num_Lock",              hl.dsp.exec_cmd("sleep 0.1 && ~/.config/hypr/lockkey-osd.sh num"),        { locked = true })
-hl.bind("XF86AudioNext",         hl.dsp.exec_cmd("playerctl next"),                                        { locked = true })
-hl.bind("XF86AudioPause",        hl.dsp.exec_cmd("playerctl play-pause"),                                  { locked = true })
-hl.bind("XF86AudioPlay",         hl.dsp.exec_cmd("playerctl play-pause"),                                  { locked = true })
-hl.bind("XF86AudioPrev",         hl.dsp.exec_cmd("playerctl previous"),                                    { locked = true })
+-- Klavyeyle fare (SUPER+ALT + hjkl = hareket, u = sol tik, y = sag tik)
+bind(mainMod .. " + ALT + h", hl.dsp.exec_cmd("ydotool mousemove -x -8 -y 0"), "Fare: [SUPER + ALT + H J K L] İmleci taşı", { repeating = true })
+bind(mainMod .. " + ALT + l", hl.dsp.exec_cmd("ydotool mousemove -x 8 -y 0"),  nil, { repeating = true })
+bind(mainMod .. " + ALT + k", hl.dsp.exec_cmd("ydotool mousemove -x 0 -y -8"), nil, { repeating = true })
+bind(mainMod .. " + ALT + j", hl.dsp.exec_cmd("ydotool mousemove -x 0 -y 8"),  nil, { repeating = true })
+bind(mainMod .. " + ALT + u", hl.dsp.exec_cmd("ydotool click 0xC0"), "Fare: Sol tık")
+bind(mainMod .. " + ALT + y", hl.dsp.exec_cmd("ydotool click 0xC1"), "Fare: Sağ tık")
 
+-- Medya tuslari
+bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("swayosd-client --output-volume raise --max-volume 150"), "Medya: [Ses / Parlaklık tuşları] OSD ile ayarla", { locked = true, repeating = true })
+bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("swayosd-client --output-volume lower"),       nil, { locked = true, repeating = true })
+bind("XF86AudioMute",         hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"), nil, { locked = true })
+bind("XF86AudioMicMute",      hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"),  nil, { locked = true })
+bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("swayosd-client --brightness raise"),          nil, { locked = true, repeating = true })
+bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness lower"),          nil, { locked = true, repeating = true })
+bind("Caps_Lock",             hl.dsp.exec_cmd("sleep 0.1 && ~/.config/hypr/lockkey-osd.sh caps"), nil, { locked = true })
+bind("Num_Lock",              hl.dsp.exec_cmd("sleep 0.1 && ~/.config/hypr/lockkey-osd.sh num"),  nil, { locked = true })
+bind("XF86AudioNext",         hl.dsp.exec_cmd("playerctl next"),       "Medya: [Medya tuşları] Oynat / duraklat / sonraki / önceki", { locked = true })
+bind("XF86AudioPause",        hl.dsp.exec_cmd("playerctl play-pause"), nil, { locked = true })
+bind("XF86AudioPlay",         hl.dsp.exec_cmd("playerctl play-pause"), nil, { locked = true })
+bind("XF86AudioPrev",         hl.dsp.exec_cmd("playerctl previous"),   nil, { locked = true })
 
 ------------------------------
 --- WINDOWS AND WORKSPACES ---
@@ -394,11 +430,3 @@ hl.window_rule({
     no_anim  = true,
 })
 
--- EWW popups
-hl.window_rule({
-    name     = "eww-popups",
-    match    = { class = "^(eww)$" },
-    float    = true,
-    pin      = true,
-    decorate = false,
-})
