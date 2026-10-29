@@ -1,6 +1,6 @@
 # Dotfiles
 
-Hyprland rice — Catppuccin Mocha (Green accent)
+Hyprland rice — Catppuccin Mocha. Accent rengi duvar kağıdından otomatik (matugen), varsayılan Green.
 
 ## Donanim
 
@@ -11,45 +11,35 @@ Hyprland rice — Catppuccin Mocha (Green accent)
 
 | Klasor | Aciklama |
 |--------|----------|
-| `hypr/` | Hyprland, hyprlock, hypridle, hyprswitch, scriptler |
+| `hypr/` | Hyprland (Lua config, 0.57+), hyprlock, hypridle, hyprswitch, scriptler |
 | `waybar/` | Ust panel config + style |
-| `rofi/` | Uygulama baslatici & guc menusu |
+| `rofi/` | Uygulama baslatici, guc menusu, kisayol yardimi |
 | `kitty/` | Terminal emulatoru |
-| `swaync/` | Bildirim servisi |
+| `swaync/` | Bildirimler + kontrol merkezi (WiFi/BT/gece ışığı/oyun modu, ses, parlaklık, medya) |
 | `fastfetch/` | Sistem bilgisi |
 | `kvantum/` | Qt tema motoru (Catppuccin Mocha Green) |
 | `kando/` | Radial pie menu |
 | `waypaper/` | Duvar kagidi yoneticisi |
 | `networkmanager-dmenu/` | Rofi ile WiFi yonetimi |
-| `applications/` | Steam .desktop (NVIDIA Prime Render Offload) |
+| `applications/` | Steam (NVIDIA Prime) ve Spotify (otomatik spicetify) .desktop |
+| `pkgbuilds/` | Yerel yamali paketler (hyprswitch: Hyprland 0.57 uyumu) |
 | `system/` | SDDM tema + mkinitcpio NVIDIA modulleri (referans) |
 | `bashrc` | Shell config (fastfetch) |
 | `mimeapps.list` | Varsayilan uygulama iliskilendirmeleri |
 
 ## Paketler
 
-### Pacman
+Tam liste ve kurulum sırası `packages.sh` içinde (pacman + AUR + yamalı hyprswitch PKGBUILD).
 
-```bash
-sudo pacman -S --needed \
-    hyprland hyprlock hypridle waybar kitty swaync dolphin loupe sddm awww \
-    kvantum grim slurp wl-clipboard cliphist playerctl brightnessctl \
-    blueman pavucontrol btop fastfetch yad ydotool steam spotify-launcher \
-    nvidia-open-dkms nvidia-utils xdg-desktop-portal-hyprland \
-    ttf-jetbrains-mono-nerd noto-fonts-emoji zip unzip github-cli
-```
+> Spotify güncellenip tema kaybolursa `~/.config/hypr/spotify.sh` açılışta otomatik `spicetify backup apply` yapar.
+> Elle gerekirse: `spicetify backup apply` (eski yedek başka sürümdense `restore` KULLANMA).
 
-### AUR (yay)
+## Accent renk sistemi
 
-```bash
-yay -S --needed \
-    rofi-wayland hyprswitch waypaper kando-bin \
-    catppuccin-cursors-mocha kvantum-theme-catppuccin-git \
-    networkmanager-dmenu-git auto-cpufreq \
-    spicetify-bin
-```
-
-> Spotify her guncellendiginde: `spicetify backup apply` (eski yedek baska surumdense `restore` KULLANMA).
+`update-accent.sh` (waypaper değişince) duvar kağıdından rengi matugen ile çıkarır,
+`accent-apply.sh` her uygulama için küçük bir renk dosyası üretir (`waybar/colors.css`,
+`rofi/colors.rasi`, `hypr/accent.lua`, `kitty/colors-accent.conf`...). Config'ler bunları
+import eder; üretilen dosyalar git dışında, symlink'ler kırılmaz. `reset-accent.sh`: Catppuccin Green.
 
 ## Kurulum
 
@@ -67,27 +57,18 @@ chmod +x install.sh && ./install.sh
 
 ## Kisayollar
 
+Tam ve güncel liste: **`SUPER + H`** (hyprland.lua'daki bind açıklamalarından otomatik üretilir, aranabilir).
+Yeni bind eklerken `description = "Kategori: Ne yapar"` yazmak yeterli.
+
 | Tus | Islem |
 |-----|-------|
-| `SUPER + Q` | Terminal (Kitty) |
-| `SUPER + R` | Uygulama baslat (Rofi) |
-| `SUPER + E` | Dosya yoneticisi |
-| `SUPER + C` | Pencereyi kapat |
-| `SUPER + F` | Tam ekran |
-| `SUPER + T` | Float pencere |
-| `SUPER + W` | Duvar kagidi degistir |
-| `SUPER + D` | Kando pie menu |
-| `SUPER + H` | Yardim menusu (5 sayfa) |
-| `SUPER + M` | Guc menusu |
-| `SUPER + L` | Ekrani kilitle |
-| `SUPER + V` | Pano gecmisi |
-| `SUPER + N` | Bildirim paneli |
-| `SUPER + SHIFT + S` | Ekran goruntusu (alan sec) |
-| `SUPER + F11` | WiFi yoneticisi |
-| `ALT + TAB` | Pencere gecisi |
-| `ALT + SHIFT` | TR/EN klavye degistir |
-| `SUPER + 1-0` | Calisma alanlari |
-| `SUPER + ALT + HJKL` | Fare emulasyonu (vim) |
+| `SUPER + Q / R / E` | Terminal / uygulama başlatıcı / dosya yöneticisi |
+| `SUPER + H` | Kısayol yardımı |
+| `SUPER + N` | Kontrol merkezi |
+| `SUPER + A` | Workspace genel bakış |
+| `SUPER + F1` | Oyun modu |
+| `ALT + TAB` | Pencere geçişi |
+| `SUPER + SHIFT + S` | Ekran görüntüsü (bildirimden Düzenle/Kaydet) |
 
 ## Ekran Goruntusu
 
