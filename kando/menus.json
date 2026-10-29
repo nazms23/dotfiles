@@ -1,99 +1,156 @@
 {
-  "version": "2.3.1",
+  "version": "3.0.1",
   "menus": [
     {
       "root": {
-        "type": "submenu",
+        "type": "root",
         "name": "Genel Menü",
         "icon": "apps",
         "iconTheme": "material-symbols-rounded",
+        "activateWorkflow": {
+          "quickSelectKey": "Backspace",
+          "actions": [
+            {
+              "type": "close-menu"
+            }
+          ]
+        },
         "children": [
           {
             "type": "submenu",
-            "data": {},
             "name": "Uygulamalar",
             "icon": "view_in_ar",
             "iconTheme": "material-symbols-rounded",
             "children": [
               {
-                "type": "command",
-                "data": {
-                  "command": "/usr/bin/google-chrome-stable",
-                  "detached": true,
-                  "isolated": false,
-                  "delayed": false
-                },
+                "type": "button",
                 "name": "Google Chrome",
                 "icon": "googlechrome",
                 "iconTheme": "simple-icons-colored",
-                "angle": 15
+                "angle": 15,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "execute-command",
+                      "command": "/usr/bin/google-chrome-stable",
+                      "detached": true,
+                      "isolated": false
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "command",
-                "data": {
-                  "command": "/home/sudouy/.local/bin/yaptodom ",
-                  "detached": true,
-                  "isolated": false,
-                  "delayed": false
-                },
+                "type": "button",
                 "name": "YapTODOm",
                 "icon": "/home/sudouy/.local/share/icons/hicolor/512x512/apps/yaptodom.png  ",
                 "iconTheme": "base64",
-                "angle": 75
+                "angle": 75,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "execute-command",
+                      "command": "/home/sudouy/.local/bin/yaptodom ",
+                      "detached": true,
+                      "isolated": false
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "command",
-                "data": {
-                  "command": "rofi -show calc -modi calc -no-show-match -no-sort -calc-command \"echo -n '{result}' | wl-copy\" ",
-                  "detached": true,
-                  "isolated": false,
-                  "delayed": false
-                },
+                "type": "button",
                 "name": "Komut Çalıştır",
                 "icon": "calculate",
                 "iconTheme": "material-symbols-rounded",
-                "angle": 180
+                "angle": 180,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "execute-command",
+                      "command": "rofi -show calc -modi calc -no-show-match -no-sort -calc-command \"echo -n '{result}' | wl-copy\" ",
+                      "detached": true,
+                      "isolated": false
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "command",
-                "data": {
-                  "command": "/usr/bin/steam",
-                  "detached": true,
-                  "isolated": false,
-                  "delayed": false
-                },
+                "type": "button",
                 "name": "Steam",
                 "icon": "steam",
                 "iconTheme": "simple-icons-colored",
-                "angle": 225
+                "angle": 225,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "execute-command",
+                      "command": "/usr/bin/steam",
+                      "detached": true,
+                      "isolated": false
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "command",
-                "data": {
-                  "command": "/usr/bin/discord",
-                  "detached": true,
-                  "isolated": false,
-                  "delayed": false
-                },
+                "type": "button",
                 "name": "Discord",
                 "icon": "discord",
                 "iconTheme": "simple-icons-colored",
-                "angle": 279
+                "angle": 279,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "execute-command",
+                      "command": "/usr/bin/discord",
+                      "detached": true,
+                      "isolated": false
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "command",
-                "data": {
-                  "command": "spotify-launcher",
-                  "detached": true,
-                  "isolated": false,
-                  "delayed": false
-                },
+                "type": "button",
                 "name": "Spotify (Launcher)",
                 "icon": "spotify",
                 "iconTheme": "simple-icons-colored",
-                "angle": 330
+                "angle": 330,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "execute-command",
+                      "command": "spotify-launcher",
+                      "detached": true,
+                      "isolated": false
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               }
             ],
+            "activateWorkflow": {
+              "quickSelectKey": "Backspace",
+              "actions": [
+                {
+                  "type": "close-submenu"
+                }
+              ]
+            },
             "angle": 315
           },
           {
@@ -103,37 +160,66 @@
             "iconTheme": "material-symbols-rounded",
             "children": [
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "ControlLeft+ShiftLeft+KeyV",
-                  "delayed": true
-                },
+                "type": "button",
                 "name": "Paste",
                 "icon": "content_paste_go",
                 "iconTheme": "material-symbols-rounded",
-                "angle": 90
+                "angle": 90,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "close-menu"
+                    },
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "ControlLeft+ShiftLeft+KeyV"
+                    }
+                  ]
+                }
               },
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "ControlLeft+ShiftLeft+KeyC",
-                  "delayed": true
-                },
+                "type": "button",
                 "name": "Copy",
                 "icon": "content_copy",
-                "iconTheme": "material-symbols-rounded"
+                "iconTheme": "material-symbols-rounded",
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "close-menu"
+                    },
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "ControlLeft+ShiftLeft+KeyC"
+                    }
+                  ]
+                }
               },
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "ControlLeft+ShiftLeft+KeyX",
-                  "delayed": true
-                },
+                "type": "button",
                 "name": "Cut",
                 "icon": "cut",
-                "iconTheme": "material-symbols-rounded"
+                "iconTheme": "material-symbols-rounded",
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "close-menu"
+                    },
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "ControlLeft+ShiftLeft+KeyX"
+                    }
+                  ]
+                }
               }
             ],
+            "activateWorkflow": {
+              "quickSelectKey": "Backspace",
+              "actions": [
+                {
+                  "type": "close-submenu"
+                }
+              ]
+            },
             "angle": 360
           },
           {
@@ -143,54 +229,101 @@
             "iconTheme": "material-symbols-rounded",
             "children": [
               {
-                "type": "uri",
-                "data": {
-                  "uri": "https://www.google.com"
-                },
+                "type": "button",
                 "name": "Google",
                 "icon": "google",
-                "iconTheme": "simple-icons-colored"
+                "iconTheme": "simple-icons-colored",
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "open-uri",
+                      "uri": "https://www.google.com"
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "uri",
-                "data": {
-                  "uri": "https://www.youtube.com/"
-                },
+                "type": "button",
                 "name": "YouTube",
                 "icon": "youtube",
-                "iconTheme": "simple-icons-colored"
+                "iconTheme": "simple-icons-colored",
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "open-uri",
+                      "uri": "https://www.youtube.com/"
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "uri",
-                "data": {
-                  "uri": "https://github.com/"
-                },
+                "type": "button",
                 "name": "GitHub",
                 "icon": "github",
-                "iconTheme": "simple-icons-colored"
+                "iconTheme": "simple-icons-colored",
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "open-uri",
+                      "uri": "https://github.com/"
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "uri",
-                "data": {
-                  "uri": "https://animecix.tv/"
-                },
+                "type": "button",
                 "name": "Animecix",
                 "icon": "animedotjs",
-                "iconTheme": "simple-icons"
+                "iconTheme": "simple-icons",
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "open-uri",
+                      "uri": "https://animecix.tv/"
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               }
             ],
+            "activateWorkflow": {
+              "quickSelectKey": "Backspace",
+              "actions": [
+                {
+                  "type": "close-submenu"
+                }
+              ]
+            },
             "angle": 405
           },
           {
-            "type": "hotkey",
-            "data": {
-              "hotkey": "MetaLeft+Tab",
-              "delayed": false
-            },
+            "type": "button",
             "name": "Next Workspace",
             "icon": "arrow_forward",
             "iconTheme": "material-symbols-rounded",
-            "angle": 450
+            "angle": 450,
+            "selectWorkflow": {
+              "actions": [
+                {
+                  "type": "simulate-hotkey",
+                  "hotkey": "MetaLeft+Tab"
+                },
+                {
+                  "type": "close-menu"
+                }
+              ]
+            }
           },
           {
             "type": "submenu",
@@ -199,50 +332,86 @@
             "iconTheme": "material-symbols-rounded",
             "children": [
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "MediaTrackNext",
-                  "delayed": false
-                },
+                "type": "button",
                 "name": "Sonraki",
                 "icon": "skip_next",
                 "iconTheme": "material-symbols-rounded",
-                "angle": 90
+                "angle": 90,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "MediaTrackNext"
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "MediaPlayPause",
-                  "delayed": false
-                },
+                "type": "button",
                 "name": "Durdur / Devam Et",
                 "icon": "play_pause",
                 "iconTheme": "material-symbols-rounded",
-                "angle": 150
+                "angle": 150,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "MediaPlayPause"
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "AudioVolumeMute",
-                  "delayed": false
-                },
+                "type": "button",
                 "name": "Sustur",
                 "icon": "music_off",
                 "iconTheme": "material-symbols-rounded",
-                "angle": 210
+                "angle": 210,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "AudioVolumeMute"
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "MediaTrackPrevious",
-                  "delayed": false
-                },
+                "type": "button",
                 "name": "Önceki",
                 "icon": "skip_previous",
                 "iconTheme": "material-symbols-rounded",
-                "angle": 270
+                "angle": 270,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "MediaTrackPrevious"
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               }
             ],
+            "activateWorkflow": {
+              "quickSelectKey": "Backspace",
+              "actions": [
+                {
+                  "type": "close-submenu"
+                }
+              ]
+            },
             "angle": 495
           },
           {
@@ -252,120 +421,204 @@
             "iconTheme": "material-symbols-rounded",
             "children": [
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "MetaLeft+KeyF",
-                  "delayed": true
-                },
+                "type": "button",
                 "name": "Tam Ekran",
                 "icon": "open_in_full",
                 "iconTheme": "material-symbols-rounded",
-                "angle": 45
+                "angle": 45,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "close-menu"
+                    },
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "MetaLeft+KeyF"
+                    }
+                  ]
+                }
               },
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "MetaLeft+ControlLeft+ArrowRight",
-                  "delayed": true
-                },
+                "type": "button",
                 "name": "Sağa Uzat",
                 "icon": "text_select_jump_to_end",
                 "iconTheme": "material-symbols-rounded",
-                "angle": 90
+                "angle": 90,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "close-menu"
+                    },
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "MetaLeft+ControlLeft+ArrowRight"
+                    }
+                  ]
+                }
               },
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "MetaLeft+KeyC",
-                  "delayed": true
-                },
+                "type": "button",
                 "name": "Pencereyi Kapat",
                 "icon": "cancel_presentation",
                 "iconTheme": "material-symbols-rounded",
-                "angle": 180
+                "angle": 180,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "close-menu"
+                    },
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "MetaLeft+KeyC"
+                    }
+                  ]
+                }
               },
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "MetaLeft+ControlLeft+ArrowLeft",
-                  "delayed": true
-                },
+                "type": "button",
                 "name": "Sola Uzat",
                 "icon": "text_select_jump_to_beginning",
                 "iconTheme": "material-symbols-rounded",
-                "angle": 270
+                "angle": 270,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "close-menu"
+                    },
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "MetaLeft+ControlLeft+ArrowLeft"
+                    }
+                  ]
+                }
               }
             ],
+            "activateWorkflow": {
+              "quickSelectKey": "Backspace",
+              "actions": [
+                {
+                  "type": "close-submenu"
+                }
+              ]
+            },
             "angle": 540
           },
           {
             "type": "submenu",
-            "data": {},
             "name": "Ayarlar",
             "icon": "build_circle",
             "iconTheme": "material-symbols-rounded",
             "children": [
               {
-                "type": "command",
-                "data": {
-                  "command": "kitty claude --resume \"hyprland-catppuccin-rice-setup\"",
-                  "detached": false,
-                  "isolated": false,
-                  "delayed": false
-                },
+                "type": "button",
                 "name": "claude rice",
                 "icon": "claude",
                 "iconTheme": "simple-icons-colored",
-                "angle": 240
+                "angle": 240,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "execute-command",
+                      "command": "kitty claude --resume \"hyprland-catppuccin-rice-setup\"",
+                      "detached": false,
+                      "isolated": false
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "settings",
-                "data": null,
+                "type": "button",
                 "name": "Kando Ayarları",
                 "icon": "settings-item.svg",
                 "iconTheme": "kando",
-                "angle": 315
+                "angle": 315,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "open-settings"
+                    },
+                    {
+                      "type": "close-menu"
+                    }
+                  ]
+                }
               },
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "MetaLeft+KeyG",
-                  "delayed": true
-                },
+                "type": "button",
                 "name": "Widget Kapat",
                 "icon": "widgets",
-                "iconTheme": "material-symbols-rounded"
+                "iconTheme": "material-symbols-rounded",
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "close-menu"
+                    },
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "MetaLeft+KeyG"
+                    }
+                  ]
+                }
               },
               {
-                "type": "hotkey",
-                "data": {
-                  "hotkey": "MetaLeft+KeyW",
-                  "delayed": true
-                },
+                "type": "button",
                 "name": "Wallpaer Değiştir",
                 "icon": "image",
                 "iconTheme": "material-symbols-rounded",
-                "angle": 510
+                "angle": 510,
+                "selectWorkflow": {
+                  "actions": [
+                    {
+                      "type": "close-menu"
+                    },
+                    {
+                      "type": "simulate-hotkey",
+                      "hotkey": "MetaLeft+KeyW"
+                    }
+                  ]
+                }
               }
             ],
+            "activateWorkflow": {
+              "quickSelectKey": "Backspace",
+              "actions": [
+                {
+                  "type": "close-submenu"
+                }
+              ]
+            },
             "angle": 585
           },
           {
-            "type": "hotkey",
-            "data": {
-              "hotkey": "MetaLeft+ShiftLeft+Tab",
-              "delayed": false
-            },
+            "type": "button",
             "name": "Previous Workspace",
             "icon": "arrow_back",
             "iconTheme": "material-symbols-rounded",
-            "angle": 630
+            "angle": 630,
+            "selectWorkflow": {
+              "actions": [
+                {
+                  "type": "simulate-hotkey",
+                  "hotkey": "MetaLeft+ShiftLeft+Tab"
+                },
+                {
+                  "type": "close-menu"
+                }
+              ]
+            }
           }
         ]
       },
       "shortcut": "",
       "shortcutID": "example-menu",
-      "centered": false,
+      "useFixedPosition": false,
+      "fixedMenuPosition": {
+        "x": 0.5,
+        "y": 0.5
+      },
       "anchored": false,
       "hoverMode": true,
       "tags": [
