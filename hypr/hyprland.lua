@@ -29,7 +29,7 @@ hl.monitor({ output = "eDP-1",    mode = "1920x1080@144", position = "1920x0", s
 
 local terminal    = "kitty"
 local fileManager = "dolphin"
-local menu        = "rofi -show drun -show-icons"
+local menu        = "~/.local/bin/baslatici"  -- github.com/nazms23/baslatici (arka planda bekler, aninda acilir)
 
 
 -----------------
@@ -46,6 +46,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
     hl.exec_cmd("sleep 3 && kando")
     hl.exec_cmd("swayosd-server")
+    hl.exec_cmd("~/.local/bin/baslatici --daemon")
     hl.exec_cmd("sleep 2 && ~/.config/hypr/update-accent.sh")
     hl.exec_cmd("~/.config/hypr/power-watch.sh")
 end)
@@ -280,7 +281,7 @@ end
 -- Genel
 bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal),    "Genel: Terminal (kitty)")
 bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager), "Genel: Dosya yöneticisi (Dolphin)")
-bind(mainMod .. " + R", hl.dsp.exec_cmd(menu),        "Genel: Uygulama başlatıcı (rofi)")
+bind(mainMod .. " + R", hl.dsp.exec_cmd(menu),        "Genel: Uygulama başlatıcı (favori, klasör, = hesap, > komut)")
 bind(mainMod .. " + D", hl.dsp.global("kando:example-menu"), "Genel: Kando pie menü")
 bind(mainMod .. " + W", hl.dsp.exec_cmd("waypaper --backend awww --folder ~/Wallpapers"), "Genel: Duvar kağıdı seç (accent otomatik)")
 bind(mainMod .. " + H", hl.dsp.exec_cmd("~/.config/hypr/keybinds-help.sh"), "Genel: Bu yardım ekranı")
@@ -439,6 +440,14 @@ hl.window_rule({
     float  = true,
     size   = { "monitor_w*0.4", "monitor_h*0.5" },
     center = true,
+})
+
+-- Baslatici (github.com/nazms23/baslatici): panel buzlu cam; tam ekran karartma (alpha 0.28) blur disi
+hl.layer_rule({
+    name         = "baslatici-blur",
+    match        = { namespace = "^baslatici$" },
+    blur         = true,
+    ignore_alpha = 0.5,
 })
 
 -- Hesap makinesi (github.com/nazms23/hesap-makinesi): kucuk yuzen pencere

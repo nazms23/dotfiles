@@ -13,7 +13,7 @@ Hyprland rice — Catppuccin Mocha. Accent rengi duvar kağıdından otomatik (m
 |--------|----------|
 | `hypr/` | Hyprland (Lua config, 0.57+), hyprlock, hypridle, hyprswitch, scriptler |
 | `waybar/` | Ust panel config + style |
-| `rofi/` | Uygulama baslatici, guc menusu, kisayol yardimi |
+| `rofi/` | Güç menüsü, kısayol yardımı (SUPER+H), pano geçmişi |
 | `kitty/` | Terminal emulatoru |
 | `swaync/` | Bildirimler + kontrol merkezi (WiFi/BT/gece ışığı/oyun modu, ses, parlaklık, medya) |
 | `fastfetch/` | Sistem bilgisi |
@@ -48,10 +48,9 @@ Accent rengi wallpaper'la canlı değişir. Her biri ayrı repo; `packages.sh` h
 
 | Uygulama | Repo | Durum |
 |---|---|---|
+| Uygulama başlatıcı (SUPER+R) | [nazms23/baslatici](https://github.com/nazms23/baslatici) | ✅ |
 | Hesap makinesi | [nazms23/hesap-makinesi](https://github.com/nazms23/hesap-makinesi) | ✅ |
-| Görsel görüntüleyici | — | yapılıyor |
-| Video oynatıcı | — | planlandı |
-| Dosya yöneticisi | — | planlandı |
+| Video oynatıcı | — | ileride |
 
 Accent rengi `hypr/accent-apply.sh` → `~/.config/accent/colors.css`; Hyprland pencere kuralları `hypr/hyprland.lua`'da.
 

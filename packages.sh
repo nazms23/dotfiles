@@ -26,7 +26,7 @@ sudo pacman -S --needed \
     earlyoom \
     nwg-look \
     pacman-contrib hyprsunset satty hyprshutdown tree-sitter-cli papirus-icon-theme \
-    python-gobject gtk4 libadwaita
+    python-gobject gtk4 libadwaita gtk4-layer-shell
 
 echo ""
 echo "=== AUR paketleri kuruluyor (yay) ==="
@@ -53,7 +53,7 @@ echo "=== hyprswitch (yerel yamali PKGBUILD, Hyprland 0.57 uyumu) ==="
 echo ""
 echo "=== Kendi uygulamalarimiz (ayri repolar -> ~/Projects, her biri kendi install.sh'i ile) ==="
 mkdir -p ~/Projects
-for app in hesap-makinesi; do
+for app in hesap-makinesi baslatici; do
     [ -d ~/Projects/"$app" ] || git clone "https://github.com/nazms23/$app.git" ~/Projects/"$app"
     ~/Projects/"$app"/install.sh
 done
